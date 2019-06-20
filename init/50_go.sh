@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 if [[ ! -e "$(type -P go)" ]]; then
     pushd ~/Downloads
     sudo apt-get update

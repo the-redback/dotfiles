@@ -104,7 +104,7 @@ HYPHEN_INSENSITIVE="true"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 # plugins=(git kubectl minikube themes zsh-syntax-highlighting zsh-autosuggestions)
-plugins=(command-not-found git golang kubectl minikube themes fast-syntax-highlighting zsh-autosuggestions autojump)
+plugins=(command-not-found git golang themes fast-syntax-highlighting zsh-autosuggestions autojump history-substring-search docker docker-compose)
 
 # run 'fast-theme -t zdharma'
 
@@ -136,6 +136,11 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
+# Turn off all beeps
+unsetopt BEEP
+# Turn off autocomplete beeps
+# unsetopt LIST_BEEP
+
 export DOCKER_REGISTRY=maruftuhin
 export REGISTRY=maruftuhin
 export GO111MODULE=on
@@ -153,3 +158,18 @@ alias xc="xclip -selection clipboard ; xclip -o -selection clipboard"
 alias xp="xclip -o -selection clipboard"
 
 # source /etc/zsh_command_not_found
+export DOTFILES=~/.dotfiles
+
+# Source all files in "source"
+function src() {
+  local file
+  if [[ "$1" ]]; then
+    source "$DOTFILES/source/$1.zsh"
+  else
+    for file in $DOTFILES/source/*.zsh; do
+      source "$file"
+    done
+  fi
+}
+
+src

@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 # Ubuntu-only stuff. Abort if not Ubuntu.
 is_ubuntu || return 1
 
@@ -11,8 +13,7 @@ deb_sources=()
 installers_path="$DOTFILES/caches/installers"
 
 # Ubuntu distro release name, eg. "xenial"
-# release_name=$(lsb_release -c | awk '{print $2}')
-release_name=bionic # bcoz all the packages not available in disco
+release_name=$(lsb_release -c | awk '{print $2}')
 
 function add_ppa() {
   apt_source_texts+=($1)
@@ -32,8 +33,6 @@ apt_packages+=(
   build-essential
   cowsay
   curl
-  docker-compose
-  docker.io
   fish
   gdebi-core
   git-core
@@ -60,12 +59,13 @@ apt_packages+=(
   terminator
   tlp
   tlp-rdw
+  tmux
   tree
   wget
 )
 
 apt_packages+=(vim)
-is_ubuntu_desktop && apt_packages+=(vim-gnome)
+# is_ubuntu_desktop && apt_packages+=(vim-gnome)
 
 # # https://github.com/neovim/neovim/wiki/Installing-Neovim
 # add_ppa ppa:neovim-ppa/stable
@@ -81,21 +81,21 @@ is_ubuntu_desktop && apt_packages+=(vim-gnome)
 # apt_packages+=(rvm)
 
 # https://github.com/rbenv/ruby-build/wiki
-apt_packages+=(
-  autoconf bison build-essential libssl-dev libyaml-dev libreadline6-dev
-  libncurses5-dev libffi-dev libgdbm3 libgdbm-dev zlib1g-dev
-)
+# apt_packages+=(
+#   autoconf bison build-essential libssl-dev libyaml-dev libreadline6-dev
+#   libncurses5-dev libffi-dev libgdbm3 libgdbm-dev zlib1g-dev
+# )
 
-# https://www.digitalocean.com/community/tutorials/how-to-install-and-configure-ansible-on-ubuntu-16-04
-add_ppa ppa:ansible/ansible
-apt_packages+=(ansible)
+# # https://www.digitalocean.com/community/tutorials/how-to-install-and-configure-ansible-on-ubuntu-16-04
+# add_ppa ppa:ansible/ansible
+# apt_packages+=(ansible)
 
 # https://launchpad.net/~hnakamur/+archive/ubuntu/tmux
-add_ppa ppa:hnakamur/tmux
+# add_ppa ppa:hnakamur/tmux
 
 # https://github.com/greymd/tmux-xpanes
-add_ppa ppa:greymd/tmux-xpanes
-apt_packages+=(tmux-xpanes)
+# add_ppa ppa:greymd/tmux-xpanes
+# apt_packages+=(tmux-xpanes)
 
 if is_ubuntu_desktop; then
   # http://www.omgubuntu.co.uk/2016/06/install-latest-arc-gtk-theme-ubuntu-16-04
@@ -188,11 +188,11 @@ if is_ubuntu_desktop; then
     gnome-tweak-tool
     k4dirstat
     rofi
+    man2html-base
     meld
     network-manager-openconnect
     network-manager-openconnect-gnome
     openssh-server
-    shutter
     synaptic
     unity-tweak-tool
     vlc
@@ -204,43 +204,47 @@ if is_ubuntu_desktop; then
   # Manage online accounts via "gnome-control-center" in launcher
   apt_packages+=(gnome-control-center gnome-online-accounts)
 
-  # https://github.com/mitchellh/vagrant/issues/7411
-  deb_installed+=(/usr/bin/vagrant)
-  deb_sources+=(https://releases.hashicorp.com/vagrant/1.9.2/vagrant_1.9.2_x86_64.deb)
-  # https://github.com/vagrant-libvirt/vagrant-libvirt/issues/575
-  # apt_packages+=(vagrant)
-  # function postinstall_vagrant() {
-  #   sudo sed -i'' "s/Specification.all = nil/Specification.reset/" /usr/lib/ruby/vendor_ruby/vagrant/bundler.rb
-  # }
+
 
   # https://be5invis.github.io/Iosevka/
   # https://launchpad.net/~laurent-boulard/+archive/ubuntu/fonts
-  add_ppa ppa:laurent-boulard/fonts
-  apt_packages+=(fonts-iosevka)
+  # add_ppa ppa:laurent-boulard/fonts
+  # apt_packages+=(fonts-iosevka)
 
   # https://launchpad.net/grub-customizer
   add_ppa ppa:danielrichter2007/grub-customizer
   apt_packages+=(grub-customizer)
 
+  # TODO: Uncomment below part. ================================
+
+  #   # https://github.com/mitchellh/vagrant/issues/7411
+  # deb_installed+=(/usr/bin/vagrant)
+  # deb_sources+=(https://releases.hashicorp.com/vagrant/1.9.2/vagrant_1.9.2_x86_64.deb)
+  # # https://github.com/vagrant-libvirt/vagrant-libvirt/issues/575
+  # # apt_packages+=(vagrant)
+  # # function postinstall_vagrant() {
+  # #   sudo sed -i'' "s/Specification.all = nil/Specification.reset/" /usr/lib/ruby/vendor_ruby/vagrant/bundler.rb
+  # # }
+
   # https://support.gitkraken.com/how-to-install
-  deb_installed+=(/usr/bin/gitkraken)
-  deb_sources+=(https://release.gitkraken.com/linux/gitkraken-amd64.deb)
+  # deb_installed+=(/usr/bin/gitkraken)
+  # deb_sources+=(https://release.gitkraken.com/linux/gitkraken-amd64.deb)
 
   # skype
-  deb_installed+=(/usr/bin/skypeforlinux)
-  deb_sources+=(https://repo.skype.com/latest/skypeforlinux-64.deb)
+  # deb_installed+=(/usr/bin/skypeforlinux)
+  # deb_sources+=(https://repo.skype.com/latest/skypeforlinux-64.deb)
 
   # mailspring: https://linuxconfig.org/how-to-install-mailspring-on-ubuntu-18-04-bionic-beaver-linux
-  deb_installed+=(/usr/bin/mailspring)
-  deb_sources+=(https://updates.getmailspring.com/download?platform=linuxDeb)
+  # deb_installed+=(/usr/bin/mailspring)
+  # deb_sources+=(https://updates.getmailspring.com/download?platform=linuxDeb)
 
   # vscode
-  deb_installed+=(/usr/bin/vscode)
-  deb_sources+=(https://vscode-update.azurewebsites.net/latest/linux-deb-x64/stable)
+  # deb_installed+=(/usr/bin/vscode)
+  # deb_sources+=(https://vscode-update.azurewebsites.net/latest/linux-deb-x64/stable)
 
   # virtualbox
-  deb_installed+=(/usr/bin/virtualbox)
-  deb_sources+=(https://download.virtualbox.org/virtualbox/6.0.6/virtualbox-6.0_6.0.6-130049~Ubuntu~bionic_amd64.deb)
+  # deb_installed+=(/usr/bin/virtualbox)
+  # deb_sources+=(https://download.virtualbox.org/virtualbox/6.0.6/virtualbox-6.0_6.0.6-130049~Ubuntu~bionic_amd64.deb)
 
   # http://www.get-notes.com/linux-download-debian-ubuntu
   # apt_packages+=(libqt5concurrent5)
@@ -248,26 +252,30 @@ if is_ubuntu_desktop; then
   # deb_sources+=("https://github.com/nuttyartist/notes/releases/download/v1.0.0/notes_1.0.0_amd64-$release_name.deb")
 
   # https://www.dropbox.com/install-linux
-  apt_packages+=(python-gtk2 python-gpgme)
-  deb_installed+=(/usr/bin/dropbox)
-  deb_sources+=("https://www.dropbox.com/download?dl=packages/ubuntu/dropbox_2015.10.28_amd64.deb")
+  # apt_packages+=(python-gtk2 python-gpgme)
+  # deb_installed+=(/usr/bin/dropbox)
+  # deb_sources+=("https://www.dropbox.com/download?dl=packages/ubuntu/dropbox_2015.10.28_amd64.deb")
 
-  # http://askubuntu.com/a/852727
-  apt_packages+=(cabextract)
-  deb_installed+=(/usr/share/fonts/truetype/msttcorefonts)
-  deb_sources+=(deb_source_msttcorefonts)
-  function deb_source_msttcorefonts() {
-    echo ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true | sudo debconf-set-selections
-    echo http://ftp.debian.org/debian/pool/contrib/m/msttcorefonts/ttf-mscorefonts-installer_3.6_all.deb
-  }
+  
 
-  # https://slack.com/downloads/instructions/linux
-  deb_installed+=(/usr/bin/slack)
-  deb_sources+=(https://downloads.slack-edge.com/linux_releases/slack-desktop-2.5.2-amd64.deb)
+  # # http://askubuntu.com/a/852727
+  # apt_packages+=(cabextract)
+  # deb_installed+=(/usr/share/fonts/truetype/msttcorefonts)
+  # deb_sources+=(deb_source_msttcorefonts)
+  # function deb_source_msttcorefonts() {
+  #   echo ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true | sudo debconf-set-selections
+  #   echo http://ftp.debian.org/debian/pool/contrib/m/msttcorefonts/ttf-mscorefonts-installer_3.6_all.deb
+  # }
 
-  # https://discordapp.com/download
-  deb_installed+=(/usr/bin/discord)
-  deb_sources+=("https://discordapp.com/api/download?platform=linux&format=deb")
+  # # https://slack.com/downloads/instructions/linux
+  # deb_installed+=(/usr/bin/slack)
+  # deb_sources+=(https://downloads.slack-edge.com/linux_releases/slack-desktop-2.5.2-amd64.deb)
+
+  # # https://discordapp.com/download
+  # deb_installed+=(/usr/bin/discord)
+  # deb_sources+=("https://discordapp.com/api/download?platform=linux&format=deb")
+
+  # ==================================== End
 
   # http://askubuntu.com/questions/854480/how-to-install-the-steam-client/854481#854481
   # apt_packages+=(python-apt)
@@ -289,13 +297,13 @@ fi
 
 function other_stuff() {
   # Install Git Extras
-  if [[ ! "$(type -P git-extras)" ]]; then
-    e_header "Installing Git Extras"
-    (
-      cd $DOTFILES/vendor/git-extras &&
-        sudo make install
-    )
-  fi
+  # if [[ ! "$(type -P git-extras)" ]]; then
+  #   e_header "Installing Git Extras"
+  #   (
+  #     cd $DOTFILES/vendor/git-extras &&
+  #       sudo make install
+  #   )
+  # fi
   # Install misc bins from zip file.
   install_from_zip ngrok 'https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-amd64.zip'
   install_from_zip terraform 'https://releases.hashicorp.com/terraform/0.9.2/terraform_0.9.2_linux_amd64.zip'
@@ -384,7 +392,7 @@ if ((${#deb_installed_i[@]} > 0)); then
     [[ "$(type -t "$deb")" == function ]] && deb="$($deb)"
     installer_file="$installers_path/$(echo "$deb" | sed 's#.*/##')"
     wget -O "$installer_file" "$deb"
-    sudo gdebi -n -i "$installer_file"
+    sudo gdebi -n "$installer_file"
   done
 fi
 

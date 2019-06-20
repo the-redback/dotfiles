@@ -5,7 +5,7 @@ IMAGE_REPO = dotfiles
 IMAGE_VERSION ?= latest
 IMAGE_NAME = $(IMAGE_PREFIX)/$(IMAGE_REPO):$(IMAGE_VERSION)
 
-.PHONY: build push run
+.PHONY: build push run install
 
 build:
 	docker build -t $(IMAGE_NAME) .
@@ -18,5 +18,8 @@ run:
 
 kube-run:
 	kubectl run -i -t --image=$(IMAGE_NAME) shell --restart=Never --rm
+
+install:
+	./bin/dotfiles
 
 default: build
