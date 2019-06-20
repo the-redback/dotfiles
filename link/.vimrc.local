@@ -1,0 +1,83 @@
+let no_buffers_menu=1
+if !exists('g:not_finish_vimplug')
+  colorscheme dracula
+  colorscheme gruvbox
+endif
+
+
+"" https://stackoverflow.com/questions/2514445/turning-off-auto-indent-when-pasting-text-into-vim
+set pastetoggle=<F3>
+
+
+"template files
+au BufNewFile *.pod.yaml silent! 0r ~/.vim/skeleton/template.pod.yaml
+au BufNewFile *.deploy.yaml silent! 0r ~/.vim/skeleton/template.deploy.yaml
+au BufNewFile *.svc.yaml silent! 0r ~/.vim/skeleton/template.svc.yaml
+au BufNewFile *.rc.yaml silent! 0r ~/.vim/skeleton/template.rc.yaml
+au BufNewFile *.rs.yaml silent! 0r ~/.vim/skeleton/template.rs.yaml
+au BufNewFile *.hpa.yaml silent! 0r ~/.vim/skeleton/template.hpa.yaml
+au BufNewFile *.pv.yaml silent! 0r ~/.vim/skeleton/template.pv.yaml
+au BufNewFile *.pvc.yaml silent! 0r ~/.vim/skeleton/template.pvc.yaml
+au BufNewFile *.crd.yaml silent! 0r ~/.vim/skeleton/template.crd.yaml
+au BufNewFile *.crdob.yaml silent! 0r ~/.vim/skeleton/template.crdob.yaml
+au BufNewFile *.secret.yaml silent! 0r ~/.vim/skeleton/template.secret.yaml
+au BufNewFile *.svcac.yaml silent! 0r ~/.vim/skeleton/template.svcac.yaml
+
+" error - pattern uses more memory than maxmempattern
+set maxmempattern=5000
+
+
+
+
+"https://github.com/scrooloose/nerdtree/issues/433
+" NERDTress File highlighting
+function! NERDTreeHighlightFile(extension, fg, bg, guifg, guibg)
+ exec 'autocmd filetype nerdtree highlight ' . a:extension .' ctermbg='. a:bg .' ctermfg='. a:fg .' guibg='. a:guibg .' guifg='. a:guifg
+ exec 'autocmd filetype nerdtree syn match ' . a:extension .' #^\s\+.*'. a:extension .'$#'
+endfunction
+
+"call NERDTreeHighlightFile('jade', 'green', 'none', 'green', '#151515')
+"call NERDTreeHighlightFile('ini', 'yellow', 'none', 'yellow', '#151515')
+"call NERDTreeHighlightFile('md', 'blue', 'none', '#3366FF', '#151515')
+"call NERDTreeHighlightFile('yml', 'yellow', 'none', 'yellow', '#151515')
+"call NERDTreeHighlightFile('config', 'yellow', 'none', 'yellow', '#151515')
+"call NERDTreeHighlightFile('conf', 'yellow', 'none', 'yellow', '#151515')
+"call NERDTreeHighlightFile('json', 'yellow', 'none', 'yellow', '#151515')
+"call NERDTreeHighlightFile('html', 'yellow', 'none', 'yellow', '#151515')
+"call NERDTreeHighlightFile('styl', 'cyan', 'none', 'cyan', '#151515')
+"call NERDTreeHighlightFile('css', 'cyan', 'none', 'cyan', '#151515')
+"call NERDTreeHighlightFile('coffee', 'Red', 'none', 'red', '#151515')
+"call NERDTreeHighlightFile('js', 'Red', 'none', '#ffa500', '#151515')
+"call NERDTreeHighlightFile('php', 'Magenta', 'none', '#ff00ff', '#151515')
+
+
+
+"https://github.com/scrooloose/nerdtree/issues/437
+"remove 'Press ? for help' line
+let NERDTreeMinimalUI=1
+
+
+
+" https://github.com/scrooloose/nerdtree/issues/806
+" remove the path at the top
+"augroup nerdtreehidecwd
+"	autocmd!
+"	autocmd FileType nerdtree setlocal conceallevel=3 | syntax match NERDTreeHideCWD #^[</].*$# conceal
+"augroup end
+"augroup nerdtreehidecwd
+"	autocmd!
+"	autocmd FileType nerdtree syntax match NERDTreeHideCWD #^[</].*$# conceal
+"augroup end
+"
+
+
+
+" gruvbox
+let g:gruvbox_italic=1
+" let g:gruvbox_contrast_dark="hard"
+set background=dark
+
+
+" no search highlight
+" https://stackoverflow.com/questions/657447/vim-clear-last-search-highlighting
+set nohlsearch

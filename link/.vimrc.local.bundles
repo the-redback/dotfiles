@@ -1,0 +1,10 @@
+"*****************************************************************************
+"" Plug install packages
+"*****************************************************************************
+Plug 'iamcco/markdown-preview.vim'
+Plug 'Valloric/YouCompleteMe'
+Plug 'w0rp/ale'
+
+"" Color
+Plug 'dracula/vim', { 'as': 'dracula' }
+Plug 'morhetz/gruvbox'
