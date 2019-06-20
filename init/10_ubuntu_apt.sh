@@ -25,46 +25,59 @@ function add_ppa() {
 
 # Misc.
 apt_packages+=(
+  apt-transport-https
+  automake
   awscli
   build-essential
-  cmatrix
   cowsay
   curl
-  docker.io
   docker-compose
+  docker.io
+  fish
+  gdebi-core
   git-core
-  groff
+  gnome-tweak-tool
+  graphviz
   hollywood
   htop
-  id3tool
+  httpie
   imagemagick
   jq
+  libappindicator1
+  linux-tools-common
+  linux-tools-generic
   mercurial
   nmap
   postgresql
+  python-dev
   python-pip
-  silversearcher-ag
-  sl
+  python-setuptools
+  rlwrap
+  software-properties-common
+  subversion
   telnet
-  thefuck
+  terminator
+  tlp
+  tlp-rdw
   tree
+  wget
 )
 
 apt_packages+=(vim)
 is_ubuntu_desktop && apt_packages+=(vim-gnome)
 
-# https://github.com/neovim/neovim/wiki/Installing-Neovim
-add_ppa ppa:neovim-ppa/stable
-apt_packages+=(neovim)
+# # https://github.com/neovim/neovim/wiki/Installing-Neovim
+# add_ppa ppa:neovim-ppa/stable
+# apt_packages+=(neovim)
 
-# https://launchpad.net/~stebbins/+archive/ubuntu/handbrake-releases
-add_ppa ppa:stebbins/handbrake-releases
-apt_packages+=(handbrake-cli)
-is_ubuntu_desktop && apt_packages+=(handbrake-gtk)
+# # https://launchpad.net/~stebbins/+archive/ubuntu/handbrake-releases
+# add_ppa ppa:stebbins/handbrake-releases
+# apt_packages+=(handbrake-cli)
+# is_ubuntu_desktop && apt_packages+=(handbrake-gtk)
 
-# https://github.com/rvm/ubuntu_rvm
-add_ppa ppa:rael-gc/rvm
-apt_packages+=(rvm)
+# # https://github.com/rvm/ubuntu_rvm
+# add_ppa ppa:rael-gc/rvm
+# apt_packages+=(rvm)
 
 # https://github.com/rbenv/ruby-build/wiki
 apt_packages+=(
@@ -75,10 +88,6 @@ apt_packages+=(
 # https://www.digitalocean.com/community/tutorials/how-to-install-and-configure-ansible-on-ubuntu-16-04
 add_ppa ppa:ansible/ansible
 apt_packages+=(ansible)
-
-# http://tipsonubuntu.com/2016/09/13/vim-8-0-released-install-ubuntu-16-04/
-add_ppa ppa:jonathonf/vim
-apt_packages+=(vim)
 
 # https://launchpad.net/~hnakamur/+archive/ubuntu/tmux
 add_ppa ppa:hnakamur/tmux
@@ -94,19 +103,23 @@ if is_ubuntu_desktop; then
   # apt_source_texts+=("deb http://download.opensuse.org/repositories/home:/Horst3180/xUbuntu_16.04/ /")
   # apt_packages+=(arc-theme)
 
-  add_ppa ppa:fossfreedom/arc-gtk-theme-daily
-  apt_packages+=(arc-theme)
+  # add_ppa ppa:fossfreedom/arc-gtk-theme-daily
+  # apt_packages+=(arc-theme)
 
   # https://www.techrepublic.com/article/how-to-connect-a-linux-machine-to-google-cloud-print/
   # sudo /usr/share/cloudprint-cups/setupcloudprint.py
-  add_ppa ppa:simon-cadman/niftyrepo
-  apt_packages+=(cupscloudprint)
+  # add_ppa ppa:simon-cadman/niftyrepo
+  # apt_packages+=(cupscloudprint)
 
   # https://github.com/tagplus5/vscode-ppa
-  apt_keys+=(https://tagplus5.github.io/vscode-ppa/ubuntu/gpg.key)
-  apt_source_files+=(vscode.list)
-  apt_source_texts+=("deb https://tagplus5.github.io/vscode-ppa/ubuntu ./")
-  apt_packages+=(code code-insiders)
+  # apt_keys+=(https://tagplus5.github.io/vscode-ppa/ubuntu/gpg.key)
+  # apt_source_files+=(vscode.list)
+  # apt_source_texts+=("deb https://tagplus5.github.io/vscode-ppa/ubuntu ./")
+  # apt_packages+=(code code-insiders)
+
+  # https://github.com/lordamit/Brightness
+  add_ppa ppa:apandada1/brightness-controller
+  apt_packages+=(brightness-controller)
 
   # https://www.ubuntuupdates.org/ppa/google_chrome
   apt_keys+=(https://dl-ssl.google.com/linux/linux_signing_key.pub)
@@ -114,36 +127,36 @@ if is_ubuntu_desktop; then
   apt_source_texts+=("deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main")
   apt_packages+=(google-chrome-stable)
 
-  # https://www.charlesproxy.com/documentation/installation/apt-repository/
-  apt_keys+=(https://www.charlesproxy.com/packages/apt/PublicKey)
-  apt_source_files+=(charles)
-  apt_source_texts+=("deb https://www.charlesproxy.com/packages/apt/ charles-proxy3 main")
-  apt_packages+=(charles-proxy)
+  # # https://www.charlesproxy.com/documentation/installation/apt-repository/
+  # apt_keys+=(https://www.charlesproxy.com/packages/apt/PublicKey)
+  # apt_source_files+=(charles)
+  # apt_source_texts+=("deb https://www.charlesproxy.com/packages/apt/ charles-proxy3 main")
+  # apt_packages+=(charles-proxy)
 
-  # https://github.com/aluxian/Messenger-for-Desktop#linux
-  apt_keys+=('--keyserver pool.sks-keyservers.net --recv 6DDA23616E3FE905FFDA152AE61DA9241537994D')
-  apt_source_files+=(aluxian)
-  apt_source_texts+=("deb https://dl.bintray.com/aluxian/deb/ beta main")
-  apt_packages+=(messengerfordesktop)
+  # # https://github.com/aluxian/Messenger-for-Desktop#linux
+  # apt_keys+=('--keyserver pool.sks-keyservers.net --recv 6DDA23616E3FE905FFDA152AE61DA9241537994D')
+  # apt_source_files+=(aluxian)
+  # apt_source_texts+=("deb https://dl.bintray.com/aluxian/deb/ beta main")
+  # apt_packages+=(messengerfordesktop)
 
   # https://www.spotify.com/us/download/linux/
-  apt_keys+=('--keyserver hkp://keyserver.ubuntu.com:80 --recv-keys BBEBDCB318AD50EC6865090613B00F1FD2C19886')
-  apt_source_files+=(spotify)
-  apt_source_texts+=("deb http://repository.spotify.com stable non-free")
-  apt_packages+=(spotify-client)
+  # apt_keys+=('--keyserver hkp://keyserver.ubuntu.com:80 --recv-keys BBEBDCB318AD50EC6865090613B00F1FD2C19886')
+  # apt_source_files+=(spotify)
+  # apt_source_texts+=("deb http://repository.spotify.com stable non-free")
+  # apt_packages+=(spotify-client)
 
   # https://tecadmin.net/install-oracle-virtualbox-on-ubuntu/
-  apt_keys+=(https://www.virtualbox.org/download/oracle_vbox_2016.asc)
-  apt_source_files+=(virtualbox)
-  apt_source_texts+=("deb http://download.virtualbox.org/virtualbox/debian $release_name contrib")
-  apt_packages+=(virtualbox-5.1)
+  # apt_keys+=(https://www.virtualbox.org/download/oracle_vbox_2016.asc)
+  # apt_source_files+=(virtualbox)
+  # apt_source_texts+=("deb http://download.virtualbox.org/virtualbox/debian $release_name contrib")
+  # apt_packages+=(virtualbox-5.1)
 
   # https://www.skype.com/en/download-skype/skype-for-linux/
   # https://community.skype.com/t5/Linux/Skype-for-Linux-Beta-signatures-couldn-t-be-verified-because-the/td-p/4645756
-  apt_keys+=(https://repo.skype.com/data/SKYPE-GPG-KEY)
-  apt_source_files+=(skype-stable)
-  apt_source_texts+=("deb https://repo.skype.com/deb stable main")
-  apt_packages+=(skypeforlinux)
+  # apt_keys+=(https://repo.skype.com/data/SKYPE-GPG-KEY)
+  # apt_source_files+=(skype-stable)
+  # apt_source_texts+=("deb https://repo.skype.com/deb stable main")
+  # apt_packages+=(skypeforlinux)
 
   # http://askubuntu.com/a/190674
   add_ppa ppa:webupd8team/java
@@ -155,25 +168,29 @@ if is_ubuntu_desktop; then
 
   # https://github.com/colinkeenan/silentcast/#ubuntu
   # https://github.com/colinkeenan/silentcast/#ubuntu-linux-full-install
-  add_ppa ppa:sethj/silentcast
-  add_ppa ppa:webupd8team/y-ppa-manager
-  apt_packages+=(
-    libav-tools x11-xserver-utils xdotool wininfo wmctrl python-gobject python-cairo xdg-utils yad
-    silentcast
-  )
+  # add_ppa ppa:sethj/silentcast
+  # add_ppa ppa:webupd8team/y-ppa-manager
+  # apt_packages+=(
+  #   libav-tools x11-xserver-utils xdotool wininfo wmctrl python-gobject python-cairo xdg-utils yad
+  #   silentcast
+  # )
 
   # Misc
   apt_packages+=(adb fastboot)
   apt_packages+=(
     chromium-browser
+    deluge
     fonts-mplus
+    gimp
     gnome-tweak-tool
     k4dirstat
     rofi
+    meld
     network-manager-openconnect
     network-manager-openconnect-gnome
     openssh-server
     shutter
+    synaptic
     unity-tweak-tool
     vlc
     xclip
@@ -205,10 +222,26 @@ if is_ubuntu_desktop; then
   deb_installed+=(/usr/bin/gitkraken)
   deb_sources+=(https://release.gitkraken.com/linux/gitkraken-amd64.deb)
 
+  # skype
+  deb_installed+=(/usr/bin/skypeforlinux)
+  deb_sources+=(https://repo.skype.com/latest/skypeforlinux-64.deb)
+
+  # mailspring: https://linuxconfig.org/how-to-install-mailspring-on-ubuntu-18-04-bionic-beaver-linux
+  deb_installed+=(/usr/bin/mailspring)
+  deb_sources+=(https://updates.getmailspring.com/download?platform=linuxDeb)
+
+  # vscode
+  deb_installed+=(/usr/bin/vscode)
+  deb_sources+=(https://vscode-update.azurewebsites.net/latest/linux-deb-x64/stable)
+
+  # virtualbox
+  deb_installed+=(/usr/bin/virtualbox)
+  deb_sources+=(https://download.virtualbox.org/virtualbox/6.0.6/virtualbox-6.0_6.0.6-130049~Ubuntu~bionic_amd64.deb)
+
   # http://www.get-notes.com/linux-download-debian-ubuntu
-  apt_packages+=(libqt5concurrent5)
-  deb_installed+=(/usr/bin/notes)
-  deb_sources+=("https://github.com/nuttyartist/notes/releases/download/v1.0.0/notes_1.0.0_amd64-$release_name.deb")
+  # apt_packages+=(libqt5concurrent5)
+  # deb_installed+=(/usr/bin/notes)
+  # deb_sources+=("https://github.com/nuttyartist/notes/releases/download/v1.0.0/notes_1.0.0_amd64-$release_name.deb")
 
   # https://www.dropbox.com/install-linux
   apt_packages+=(python-gtk2 python-gpgme)
@@ -233,15 +266,15 @@ if is_ubuntu_desktop; then
   deb_sources+=("https://discordapp.com/api/download?platform=linux&format=deb")
 
   # http://askubuntu.com/questions/854480/how-to-install-the-steam-client/854481#854481
-  apt_packages+=(python-apt)
-  deb_installed+=(/usr/bin/steam)
-  deb_sources+=(deb_source_steam)
-  function deb_source_steam() {
-    local steam_root steam_file
-    steam_root=http://repo.steampowered.com/steam/pool/steam/s/steam/
-    steam_file="$(wget -q -O- "$steam_root?C=M;O=D" | sed -En '/steam-launcher/{s/.*href="([^"]+)".*/\1/;p;q;}')"
-    echo "$steam_root$steam_file"
-  }
+  # apt_packages+=(python-apt)
+  # deb_installed+=(/usr/bin/steam)
+  # deb_sources+=(deb_source_steam)
+  # function deb_source_steam() {
+  #   local steam_root steam_file
+  #   steam_root=http://repo.steampowered.com/steam/pool/steam/s/steam/
+  #   steam_file="$(wget -q -O- "$steam_root?C=M;O=D" | sed -En '/steam-launcher/{s/.*href="([^"]+)".*/\1/;p;q;}')"
+  #   echo "$steam_root$steam_file"
+  # }
   # https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=772598
   # apt_packages+=(steam)
   # function preinstall_steam() {
@@ -256,7 +289,7 @@ function other_stuff() {
     e_header "Installing Git Extras"
     (
       cd $DOTFILES/vendor/git-extras &&
-      sudo make install
+        sudo make install
     )
   fi
   # Install misc bins from zip file.
@@ -271,10 +304,12 @@ function other_stuff() {
 # Add APT keys.
 keys_cache=$DOTFILES/caches/init/apt_keys
 IFS=$'\n' GLOBIGNORE='*' command eval 'setdiff_cur=($(<$keys_cache))'
-setdiff_new=("${apt_keys[@]}"); setdiff; apt_keys=("${setdiff_out[@]}")
+setdiff_new=("${apt_keys[@]}")
+setdiff
+apt_keys=("${setdiff_out[@]}")
 unset setdiff_new setdiff_cur setdiff_out
 
-if (( ${#apt_keys[@]} > 0 )); then
+if ((${#apt_keys[@]} > 0)); then
   e_header "Adding APT keys (${#apt_keys[@]})"
   for key in "${apt_keys[@]}"; do
     e_arrow "$key"
@@ -282,8 +317,8 @@ if (( ${#apt_keys[@]} > 0 )); then
       sudo apt-key adv $key
     else
       wget -qO- $key | sudo apt-key add -
-    fi && \
-    echo "$key" >> $keys_cache
+    fi &&
+      echo "$key" >>$keys_cache
   done
 fi
 
@@ -291,7 +326,7 @@ fi
 function __temp() { [[ ! -e /etc/apt/sources.list.d/$1.list ]]; }
 source_i=($(array_filter_i apt_source_files __temp))
 
-if (( ${#source_i[@]} > 0 )); then
+if ((${#source_i[@]} > 0)); then
   e_header "Adding APT sources (${#source_i[@]})"
   for i in "${source_i[@]}"; do
     source_file=${apt_source_files[i]}
@@ -322,13 +357,13 @@ fi
 installed_apt_packages="$(dpkg --get-selections | grep -v deinstall | awk 'BEGIN{FS="[\t:]"}{print $1}' | uniq)"
 apt_packages=($(setdiff "${apt_packages[*]}" "$installed_apt_packages"))
 
-if (( ${#apt_packages[@]} > 0 )); then
+if ((${#apt_packages[@]} > 0)); then
   e_header "Installing APT packages (${#apt_packages[@]})"
   for package in "${apt_packages[@]}"; do
     e_arrow "$package"
     [[ "$(type -t preinstall_$package)" == function ]] && preinstall_$package
-    sudo apt-get -qq install "$package" && \
-    [[ "$(type -t postinstall_$package)" == function ]] && postinstall_$package
+    sudo apt-get -qq install "$package" &&
+      [[ "$(type -t postinstall_$package)" == function ]] && postinstall_$package
   done
 fi
 
@@ -336,7 +371,7 @@ fi
 function __temp() { [[ ! -e "$1" ]]; }
 deb_installed_i=($(array_filter_i deb_installed __temp))
 
-if (( ${#deb_installed_i[@]} > 0 )); then
+if ((${#deb_installed_i[@]} > 0)); then
   mkdir -p "$installers_path"
   e_header "Installing debs (${#deb_installed_i[@]})"
   for i in "${deb_installed_i[@]}"; do
@@ -345,14 +380,16 @@ if (( ${#deb_installed_i[@]} > 0 )); then
     [[ "$(type -t "$deb")" == function ]] && deb="$($deb)"
     installer_file="$installers_path/$(echo "$deb" | sed 's#.*/##')"
     wget -O "$installer_file" "$deb"
-    sudo dpkg -i "$installer_file"
+    sudo gdebi -n -i "$installer_file"
   done
 fi
 
 # install bins from zip file
 function install_from_zip() {
   local name=$1 url=$2 bins b zip tmp
-  shift 2; bins=("$@"); [[ "${#bins[@]}" == 0 ]] && bins=($name)
+  shift 2
+  bins=("$@")
+  [[ "${#bins[@]}" == 0 ]] && bins=($name)
   if [[ ! "$(which $name)" ]]; then
     mkdir -p "$installers_path"
     e_header "Installing $name"
