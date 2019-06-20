@@ -1,0 +1,6 @@
+10_ubuntu_apt.sh
+30_python_pip.sh
+50_go.sh
+50_oh-my-zsh.sh
+50_tilix.sh
+50_vim.sh

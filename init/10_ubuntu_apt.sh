@@ -11,7 +11,8 @@ deb_sources=()
 installers_path="$DOTFILES/caches/installers"
 
 # Ubuntu distro release name, eg. "xenial"
-release_name=$(lsb_release -c | awk '{print $2}')
+# release_name=$(lsb_release -c | awk '{print $2}')
+release_name=bionic # bcoz all the packages not available in disco
 
 function add_ppa() {
   apt_source_texts+=($1)
