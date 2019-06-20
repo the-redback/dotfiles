@@ -178,9 +178,11 @@ if is_ubuntu_desktop; then
   # Misc
   apt_packages+=(adb fastboot)
   apt_packages+=(
+    autojump
     chromium-browser
     deluge
     fonts-mplus
+    fonts-powerline
     gimp
     gnome-tweak-tool
     k4dirstat
@@ -195,6 +197,7 @@ if is_ubuntu_desktop; then
     vlc
     xclip
     zenmap
+    zsh
   )
 
   # Manage online accounts via "gnome-control-center" in launcher
