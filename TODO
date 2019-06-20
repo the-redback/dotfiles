@@ -1,2 +1,3 @@
 * fast-theme -t zdharma
 - dconf tilix config file
+* Use apt instead of apt-get
