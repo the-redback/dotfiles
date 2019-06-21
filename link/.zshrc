@@ -1,3 +1,4 @@
+export TERM="xterm-256color"
 # If you come from bash you might have to change your $PATH.
 export PATH=$HOME/bin:/usr/local/bin:$PATH
 export PYTHONPATH=$HOME
@@ -22,26 +23,35 @@ export ZSH="/home/maruf/.oh-my-zsh"
 ZSH_THEME="powerlevel10k/powerlevel10k"
 
 # ============================== powerlevele9k
+POWERLEVEL9K_COMMAND_EXECUTION_TIME_THRESHOLD=1
 POWERLEVEL9K_MODE="nerdfont-complete"
 #POWERLEVEL9K_MODE="awesome-fontconfig"
 POWERLEVEL9K_STATUS_HIDE_SIGNAME=true
 
+# fish like directory path, ie, ~/g/s/g/k/postgres
 POWERLEVEL9K_SHORTEN_DIR_LENGTH=1
+POWERLEVEL9K_SHORTEN_DELIMITER=""
+POWERLEVEL9K_SHORTEN_STRATEGY="truncate_from_right"
+
 #POWERLEVEL9K_DISABLE_RPROMPT=true
 #POWERLEVEL9K_PROMPT_ON_NEWLINE=true
-#POWERLEVEL9K_MULTILINE_LAST_PROMPT_PREFIX="~ "
+#POWERLEVEL9K_MULTILINE_LAST_PROMPT_PREFIX="> "
 #POWERLEVEL9K_MULTILINE_FIRST_PROMPT_PREFIX=""
 
+POWERLEVEL9K_VCS_GIT_HOOKS=(vcs-detect-changes)
 POWERLEVEL9K_VCS_SHORTEN_LENGTH=4
-POWERLEVEL9K_VCS_SHORTEN_MIN_LENGTH=11
+POWERLEVEL9K_VCS_SHORTEN_MIN_LENGTH=8
 POWERLEVEL9K_VCS_SHORTEN_STRATEGY="truncate_from_right"
 POWERLEVEL9K_VCS_SHORTEN_DELIMITER=".."
 POWERLEVEL9K_HIDE_BRANCH_ICON=true
 POWERLEVEL9K_VCS_GIT_ICON=$'\uF113 '
 #POWERLEVEL9K_COLOR_SCHEME='light'
 
+#POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(dir vcs)
+#POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status)
 POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(dir vcs)
-POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status)
+POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status root_indicator background_jobs command_execution_time)
+
 
 # end =======================================
 
@@ -49,7 +59,7 @@ POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status)
 # Setting this variable when ZSH_THEME=random will cause zsh to load
 # a theme from this variable instead of looking in ~/.oh-my-zsh/themes/
 # If set to an empty array, this variable will have no effect.
-ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
+ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" "amuse")
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
