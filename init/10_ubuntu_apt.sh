@@ -179,9 +179,9 @@ if is_ubuntu_desktop; then
   # Misc
   apt_packages+=(adb fastboot)
   apt_packages+=(
-    autojump
     chromium-browser
     deluge
+    fasd
     fonts-mplus
     fonts-powerline
     gimp

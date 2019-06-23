@@ -52,14 +52,13 @@ POWERLEVEL9K_VCS_GIT_ICON=$'\uF113 '
 POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(dir vcs)
 POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status root_indicator background_jobs command_execution_time)
 
-
 # end =======================================
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
 # a theme from this variable instead of looking in ~/.oh-my-zsh/themes/
 # If set to an empty array, this variable will have no effect.
-ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" "amuse")
+ZSH_THEME_RANDOM_CANDIDATES=("robbyrussell" "agnoster" "amuse")
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -114,7 +113,17 @@ HYPHEN_INSENSITIVE="true"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 # plugins=(git kubectl minikube themes zsh-syntax-highlighting zsh-autosuggestions)
-plugins=(command-not-found git golang themes fast-syntax-highlighting zsh-autosuggestions autojump history-substring-search docker docker-compose)
+plugins=(
+  command-not-found
+  git
+  golang
+  themes
+  fast-syntax-highlighting
+  zsh-autosuggestions
+  fasd
+  history-substring-search
+  docker docker-compose
+)
 
 # run 'fast-theme -t zdharma'
 
