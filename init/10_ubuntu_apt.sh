@@ -48,7 +48,6 @@ apt_packages+=(
   linux-tools-generic
   mercurial
   nmap
-  postgresql
   python-dev
   python-pip
   python-setuptools
