@@ -24,6 +24,7 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 
 # ============================== powerlevele9k
 POWERLEVEL9K_COMMAND_EXECUTION_TIME_THRESHOLD=1
+POWERLEVEL9K_COMMAND_EXECUTION_TIME_BACKGROUND='blue'
 POWERLEVEL9K_MODE="nerdfont-complete"
 #POWERLEVEL9K_MODE="awesome-fontconfig"
 POWERLEVEL9K_STATUS_HIDE_SIGNAME=true
@@ -49,8 +50,8 @@ POWERLEVEL9K_VCS_GIT_ICON=$'\uF113 '
 
 #POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(dir vcs)
 #POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status)
-POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(dir vcs)
-POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status root_indicator background_jobs command_execution_time)
+POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(dir)
+POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status root_indicator background_jobs command_execution_time vcs) 
 
 # end =======================================
 
@@ -192,3 +193,9 @@ function src() {
 }
 
 src
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/home/maruf/google-cloud-sdk/path.zsh.inc' ]; then . '/home/maruf/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/home/maruf/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/maruf/google-cloud-sdk/completion.zsh.inc'; fi
