@@ -1000,35 +1000,6 @@ _minikube_ip()
     noun_aliases=()
 }
 
-_minikube_kubectl()
-{
-    last_command="minikube_kubectl"
-    commands=()
-
-    flags=()
-    two_word_flags=()
-    local_nonpersistent_flags=()
-    flags_with_completion=()
-    flags_completion=()
-
-    flags+=("--alsologtostderr")
-    flags+=("--bootstrapper=")
-    two_word_flags+=("-b")
-    flags+=("--log_backtrace_at=")
-    flags+=("--log_dir=")
-    flags+=("--logtostderr")
-    flags+=("--profile=")
-    two_word_flags+=("-p")
-    flags+=("--stderrthreshold=")
-    flags+=("--v=")
-    two_word_flags+=("-v")
-    flags+=("--vmodule=")
-
-    must_have_one_flag=()
-    must_have_one_noun=()
-    noun_aliases=()
-}
-
 _minikube_logs()
 {
     last_command="minikube_logs"
@@ -1332,8 +1303,6 @@ _minikube_start()
     local_nonpersistent_flags+=("--hyperkit-vsock-ports=")
     flags+=("--hyperv-virtual-switch=")
     local_nonpersistent_flags+=("--hyperv-virtual-switch=")
-    flags+=("--image-mirror-country=")
-    local_nonpersistent_flags+=("--image-mirror-country=")
     flags+=("--image-repository=")
     local_nonpersistent_flags+=("--image-repository=")
     flags+=("--insecure-registry=")
@@ -1579,7 +1548,6 @@ _minikube_root_command()
     commands+=("delete")
     commands+=("docker-env")
     commands+=("ip")
-    commands+=("kubectl")
     commands+=("logs")
     commands+=("mount")
     commands+=("profile")
