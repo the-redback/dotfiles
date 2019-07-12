@@ -165,6 +165,11 @@ export DOCKER_REGISTRY=maruftuhin
 export REGISTRY=maruftuhin
 export GO111MODULE=on
 
+# some more ls aliases
+alias ll='ls -lgaFh'
+alias l='ls -AF'
+
+# git aliases
 alias gg="git gui"
 alias gs="git status"
 alias gm="git checkout master;git pull origin master"
@@ -172,8 +177,12 @@ alias gp="git add .; git commit -a -m added-all; git push origin HEAD"
 alias g2h="git push origin HEAD"
 alias gr="git reset --hard HEAD"
 alias gf="git fetch --all --tags --prune"
+
+# kubectl aliases
 alias kc="kubectl"
 alias k="kubectl"
+
+# xclip
 alias xc="xclip -selection clipboard ; xclip -o -selection clipboard"
 alias xp="xclip -o -selection clipboard"
 
