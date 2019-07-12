@@ -49,3 +49,9 @@ if [ -e $commands[helm] ]; then
   helm completion bash > $DOTFILES/source/50_helm.sh
   helm completion zsh > $DOTFILES/source/50_helm.zsh
 fi
+
+
+if [ -e $commands[kind] ]; then
+  kind completion bash > $DOTFILES/source/50_kind.sh
+  kind completion zsh > $DOTFILES/source/50_kind.zsh
+fi
