@@ -107,13 +107,7 @@ __kind_handle_reply()
     fi
 
     if [[ ${#COMPREPLY[@]} -eq 0 ]]; then
-		if declare -F __kind_custom_func >/dev/null; then
-			# try command name qualified custom func
-			__kind_custom_func
-		else
-			# otherwise fall back to unqualified for compatibility
-			declare -F __custom_func >/dev/null && __custom_func
-		fi
+        declare -F __custom_func >/dev/null && __custom_func
     fi
 
     # available in bash-completion >= 2, not always present on macOS
@@ -177,8 +171,7 @@ __kind_handle_flag()
     fi
 
     # skip the argument to a two word flag
-    if [[ ${words[c]} != *"="* ]] && __kind_contains_word "${words[c]}" "${two_word_flags[@]}"; then
-			  __kind_debug "${FUNCNAME[0]}: found a flag ${words[c]}, skip the next argument"
+    if __kind_contains_word "${words[c]}" "${two_word_flags[@]}"; then
         c=$((c+1))
         # if we are looking for a flags value, don't show commands
         if [[ $c -eq $cword ]]; then
@@ -265,13 +258,10 @@ _kind_build_base-image()
     flags_completion=()
 
     flags+=("--image=")
-    two_word_flags+=("--image")
     local_nonpersistent_flags+=("--image=")
     flags+=("--source=")
-    two_word_flags+=("--source")
     local_nonpersistent_flags+=("--source=")
     flags+=("--loglevel=")
-    two_word_flags+=("--loglevel")
 
     must_have_one_flag=()
     must_have_one_noun=()
@@ -293,19 +283,14 @@ _kind_build_node-image()
     flags_completion=()
 
     flags+=("--base-image=")
-    two_word_flags+=("--base-image")
     local_nonpersistent_flags+=("--base-image=")
     flags+=("--image=")
-    two_word_flags+=("--image")
     local_nonpersistent_flags+=("--image=")
     flags+=("--kube-root=")
-    two_word_flags+=("--kube-root")
     local_nonpersistent_flags+=("--kube-root=")
     flags+=("--type=")
-    two_word_flags+=("--type")
     local_nonpersistent_flags+=("--type=")
     flags+=("--loglevel=")
-    two_word_flags+=("--loglevel")
 
     must_have_one_flag=()
     must_have_one_noun=()
@@ -329,7 +314,6 @@ _kind_build()
     flags_completion=()
 
     flags+=("--loglevel=")
-    two_word_flags+=("--loglevel")
 
     must_have_one_flag=()
     must_have_one_noun=()
@@ -354,7 +338,6 @@ _kind_completion_bash()
     flags+=("-h")
     local_nonpersistent_flags+=("--help")
     flags+=("--loglevel=")
-    two_word_flags+=("--loglevel")
 
     must_have_one_flag=()
     must_have_one_noun=()
@@ -376,7 +359,6 @@ _kind_completion_zsh()
     flags_completion=()
 
     flags+=("--loglevel=")
-    two_word_flags+=("--loglevel")
 
     must_have_one_flag=()
     must_have_one_noun=()
@@ -400,7 +382,6 @@ _kind_completion()
     flags_completion=()
 
     flags+=("--loglevel=")
-    two_word_flags+=("--loglevel")
 
     must_have_one_flag=()
     must_have_one_noun=()
@@ -422,21 +403,16 @@ _kind_create_cluster()
     flags_completion=()
 
     flags+=("--config=")
-    two_word_flags+=("--config")
     local_nonpersistent_flags+=("--config=")
     flags+=("--image=")
-    two_word_flags+=("--image")
     local_nonpersistent_flags+=("--image=")
     flags+=("--name=")
-    two_word_flags+=("--name")
     local_nonpersistent_flags+=("--name=")
     flags+=("--retain")
     local_nonpersistent_flags+=("--retain")
     flags+=("--wait=")
-    two_word_flags+=("--wait")
     local_nonpersistent_flags+=("--wait=")
     flags+=("--loglevel=")
-    two_word_flags+=("--loglevel")
 
     must_have_one_flag=()
     must_have_one_noun=()
@@ -459,7 +435,6 @@ _kind_create()
     flags_completion=()
 
     flags+=("--loglevel=")
-    two_word_flags+=("--loglevel")
 
     must_have_one_flag=()
     must_have_one_noun=()
@@ -481,10 +456,8 @@ _kind_delete_cluster()
     flags_completion=()
 
     flags+=("--name=")
-    two_word_flags+=("--name")
     local_nonpersistent_flags+=("--name=")
     flags+=("--loglevel=")
-    two_word_flags+=("--loglevel")
 
     must_have_one_flag=()
     must_have_one_noun=()
@@ -507,7 +480,6 @@ _kind_delete()
     flags_completion=()
 
     flags+=("--loglevel=")
-    two_word_flags+=("--loglevel")
 
     must_have_one_flag=()
     must_have_one_noun=()
@@ -529,10 +501,8 @@ _kind_export_logs()
     flags_completion=()
 
     flags+=("--name=")
-    two_word_flags+=("--name")
     local_nonpersistent_flags+=("--name=")
     flags+=("--loglevel=")
-    two_word_flags+=("--loglevel")
 
     must_have_one_flag=()
     must_have_one_noun=()
@@ -555,7 +525,6 @@ _kind_export()
     flags_completion=()
 
     flags+=("--loglevel=")
-    two_word_flags+=("--loglevel")
 
     must_have_one_flag=()
     must_have_one_noun=()
@@ -577,7 +546,6 @@ _kind_get_clusters()
     flags_completion=()
 
     flags+=("--loglevel=")
-    two_word_flags+=("--loglevel")
 
     must_have_one_flag=()
     must_have_one_noun=()
@@ -601,10 +569,8 @@ _kind_get_kubeconfig()
     flags+=("--internal")
     local_nonpersistent_flags+=("--internal")
     flags+=("--name=")
-    two_word_flags+=("--name")
     local_nonpersistent_flags+=("--name=")
     flags+=("--loglevel=")
-    two_word_flags+=("--loglevel")
 
     must_have_one_flag=()
     must_have_one_noun=()
@@ -626,10 +592,8 @@ _kind_get_kubeconfig-path()
     flags_completion=()
 
     flags+=("--name=")
-    two_word_flags+=("--name")
     local_nonpersistent_flags+=("--name=")
     flags+=("--loglevel=")
-    two_word_flags+=("--loglevel")
 
     must_have_one_flag=()
     must_have_one_noun=()
@@ -651,10 +615,8 @@ _kind_get_nodes()
     flags_completion=()
 
     flags+=("--name=")
-    two_word_flags+=("--name")
     local_nonpersistent_flags+=("--name=")
     flags+=("--loglevel=")
-    two_word_flags+=("--loglevel")
 
     must_have_one_flag=()
     must_have_one_noun=()
@@ -680,7 +642,6 @@ _kind_get()
     flags_completion=()
 
     flags+=("--loglevel=")
-    two_word_flags+=("--loglevel")
 
     must_have_one_flag=()
     must_have_one_noun=()
@@ -702,13 +663,10 @@ _kind_load_docker-image()
     flags_completion=()
 
     flags+=("--name=")
-    two_word_flags+=("--name")
     local_nonpersistent_flags+=("--name=")
     flags+=("--nodes=")
-    two_word_flags+=("--nodes")
     local_nonpersistent_flags+=("--nodes=")
     flags+=("--loglevel=")
-    two_word_flags+=("--loglevel")
 
     must_have_one_flag=()
     must_have_one_noun=()
@@ -730,13 +688,10 @@ _kind_load_image-archive()
     flags_completion=()
 
     flags+=("--name=")
-    two_word_flags+=("--name")
     local_nonpersistent_flags+=("--name=")
     flags+=("--nodes=")
-    two_word_flags+=("--nodes")
     local_nonpersistent_flags+=("--nodes=")
     flags+=("--loglevel=")
-    two_word_flags+=("--loglevel")
 
     must_have_one_flag=()
     must_have_one_noun=()
@@ -760,7 +715,6 @@ _kind_load()
     flags_completion=()
 
     flags+=("--loglevel=")
-    two_word_flags+=("--loglevel")
 
     must_have_one_flag=()
     must_have_one_noun=()
@@ -782,7 +736,6 @@ _kind_version()
     flags_completion=()
 
     flags+=("--loglevel=")
-    two_word_flags+=("--loglevel")
 
     must_have_one_flag=()
     must_have_one_noun=()
@@ -812,7 +765,6 @@ _kind_root_command()
     flags_completion=()
 
     flags+=("--loglevel=")
-    two_word_flags+=("--loglevel")
 
     must_have_one_flag=()
     must_have_one_noun=()

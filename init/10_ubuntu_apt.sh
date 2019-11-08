@@ -55,7 +55,7 @@ apt_packages+=(
   software-properties-common
   subversion
   telnet
-  terminator
+  # terminator
   tlp
   tlp-rdw
   tmux

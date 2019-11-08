@@ -1,49 +1,6 @@
-# Where the magic happens.
-export DOTFILES=~/.dotfiles
-
-# Source all files in "source"
-function src() {
-  local file
-  if [[ "$1" ]]; then
-    source "$DOTFILES/source/$1.sh"
-  else
-    for file in $DOTFILES/source/*.sh; do
-      source "$file"
-    done
-  fi
-}
-
-# Run dotfiles script, then source.
-function dotfiles() {
-  $DOTFILES/bin/dotfiles "$@" && src
-}
-
-src
-
 # ~/.bashrc: executed by bash(1) for non-login shells.
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
-export PYTHONPATH=$HOME
-export PATH=$PYTHONPATH/bin:/usr/local/go/bin:$PATH
-export GOPATH=$HOME/go
-export PATH=$GOPATH/bin:/usr/local/go/bin:$PATH
-export PATH=/snap/bin:$PATH
-export PATH=/usr/local/bin:$PATH
-export PATH=~/.local/bin:$PATH
-
-export DOCKER_REGISTRY=maruftuhin
-export REGISTRY=maruftuhin
-export GO111MODULE=on
-export KIND_IMAGE=kindest/node:v1.16.2
-
-
-alias gg="git gui"
-alias gs="git status"
-alias gm="git checkout master;git pull origin master"
-alias gp="git add .; git commit -a -m added-all; git push origin HEAD"
-alias g2h="git push origin HEAD"
-alias gr="git reset --hard HEAD"
-alias gf="git fetch --all --tags --prune --prune-tags"
 
 # If not running interactively, don't do anything
 case $- in
@@ -131,8 +88,9 @@ fi
 #export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 
 # some more ls aliases
-alias ll='ls -lgaFh'
-alias l='ls -AF'
+alias ll='ls -alF'
+alias la='ls -A'
+alias l='ls -CF'
 
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
@@ -157,6 +115,3 @@ if ! shopt -oq posix; then
     . /etc/bash_completion
   fi
 fi
-
-
-export KUBECONFIG="$(kind get kubeconfig-path --name="kind")"

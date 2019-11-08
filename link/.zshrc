@@ -6,6 +6,7 @@ export PATH=$PYTHONPATH/bin:/usr/local/go/bin:$PATH
 export GOPATH=$HOME/go
 export PATH=$GOPATH/bin:/usr/local/go/bin:$PATH
 export PATH=${KREW_ROOT:-$HOME/.krew}/bin:$PATH
+export PATH=/snap/bin:$PATH
 export PATH=/usr/local/bin/:$PATH
 export PATH=/usr/bin/:$PATH
 export PATH=~/.local/bin:$PATH
@@ -40,8 +41,8 @@ POWERLEVEL9K_SHORTEN_STRATEGY="truncate_from_right"
 #POWERLEVEL9K_MULTILINE_FIRST_PROMPT_PREFIX=""
 
 POWERLEVEL9K_VCS_GIT_HOOKS=(vcs-detect-changes)
-POWERLEVEL9K_VCS_SHORTEN_LENGTH=4
-POWERLEVEL9K_VCS_SHORTEN_MIN_LENGTH=8
+POWERLEVEL9K_VCS_SHORTEN_LENGTH=15
+POWERLEVEL9K_VCS_SHORTEN_MIN_LENGTH=13
 POWERLEVEL9K_VCS_SHORTEN_STRATEGY="truncate_from_right"
 POWERLEVEL9K_VCS_SHORTEN_DELIMITER=".."
 POWERLEVEL9K_HIDE_BRANCH_ICON=true
@@ -164,6 +165,7 @@ unsetopt BEEP
 export DOCKER_REGISTRY=maruftuhin
 export REGISTRY=maruftuhin
 export GO111MODULE=on
+export KIND_IMAGE=kindest/node:v1.16.2
 
 # some more ls aliases
 alias ll='ls -lgaFh'
@@ -176,7 +178,7 @@ alias gm="git checkout master;git pull origin master"
 alias gp="git add .; git commit -a -m added-all; git push origin HEAD"
 alias g2h="git push origin HEAD"
 alias gr="git reset --hard HEAD"
-alias gf="git fetch --all --tags --prune"
+alias gf="git fetch --all --tags --prune --prune-tags"
 
 # kubectl aliases
 alias kc="kubectl"
@@ -208,3 +210,6 @@ if [ -f '/home/maruf/google-cloud-sdk/path.zsh.inc' ]; then . '/home/maruf/googl
 
 # The next line enables shell command completion for gcloud.
 if [ -f '/home/maruf/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/maruf/google-cloud-sdk/completion.zsh.inc'; fi
+
+
+export KUBECONFIG="$(kind get kubeconfig-path --name="kind")"
