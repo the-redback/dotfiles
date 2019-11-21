@@ -165,7 +165,7 @@ unsetopt BEEP
 export DOCKER_REGISTRY=maruftuhin
 export REGISTRY=maruftuhin
 export GO111MODULE=on
-export KIND_IMAGE=kindest/node:v1.16.2
+export KIND_IMAGE=kindest/node:v1.16.3
 
 # some more ls aliases
 alias ll='ls -lgaFh'
@@ -210,6 +210,3 @@ if [ -f '/home/maruf/google-cloud-sdk/path.zsh.inc' ]; then . '/home/maruf/googl
 
 # The next line enables shell command completion for gcloud.
 if [ -f '/home/maruf/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/maruf/google-cloud-sdk/completion.zsh.inc'; fi
-
-
-export KUBECONFIG="$(kind get kubeconfig-path --name="kind")"

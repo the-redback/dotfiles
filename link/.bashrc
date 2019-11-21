@@ -34,7 +34,7 @@ export PATH=~/.local/bin:$PATH
 export DOCKER_REGISTRY=maruftuhin
 export REGISTRY=maruftuhin
 export GO111MODULE=on
-export KIND_IMAGE=kindest/node:v1.16.2
+export KIND_IMAGE=kindest/node:v1.16.3
 
 
 alias gg="git gui"
@@ -157,6 +157,3 @@ if ! shopt -oq posix; then
     . /etc/bash_completion
   fi
 fi
-
-
-export KUBECONFIG="$(kind get kubeconfig-path --name="kind")"
