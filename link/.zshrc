@@ -117,6 +117,7 @@ HYPHEN_INSENSITIVE="true"
 # plugins=(git kubectl minikube themes zsh-syntax-highlighting zsh-autosuggestions)
 plugins=(
   command-not-found
+  docker
   git
   golang
   themes
@@ -125,6 +126,7 @@ plugins=(
   fasd
   history-substring-search
   docker docker-compose
+  vagrant
 )
 
 # run 'fast-theme -t zdharma'

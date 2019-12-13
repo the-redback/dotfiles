@@ -3,7 +3,11 @@
 	email = maruf.2hin@gmail.com
 
 [diff]
-	external = meld
+  external = meld
+  tool = meld
+
+[difftool]
+  prompt = false
 
 [core]
   autocrlf = input
