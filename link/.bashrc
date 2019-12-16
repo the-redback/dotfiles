@@ -24,7 +24,7 @@ src
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
 export PYTHONPATH=$HOME
-export PATH=$PYTHONPATH/bin:/usr/local/go/bin:$PATH
+export PATH=$PYTHONPATH/bin:/usr/local/go/bin:/snap/bin:$PATH
 export GOPATH=$HOME/go
 export PATH=$GOPATH/bin:/usr/local/go/bin:$PATH
 export PATH=/snap/bin:$PATH
