@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+# Ubuntu-only stuff. Abort if not Ubuntu.
+is_ubuntu || return 1
+
 if [[ ! -e "$(type -P go)" ]]; then
     pushd ~/Downloads
     sudo apt-get update
