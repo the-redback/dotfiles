@@ -9,7 +9,7 @@ recipes=(
   ansible
   awscli
   bash
-  # cmatrix
+  cmatrix
   coreutils
   cowsay
   git
@@ -22,13 +22,9 @@ recipes=(
   man2html
   mercurial
   nmap
-  # postgresql
-  # reattach-to-user-namespace
   sl
   ssh-copy-id
   terminal-notifier
-  # the_silver_searcher
-  # thefuck
   tmux
   tmux-xpanes
   tree
