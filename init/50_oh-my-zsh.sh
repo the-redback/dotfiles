@@ -7,7 +7,7 @@ fi
 
 # plugin auto-suggestion
 if [ ! -d "$HOME/.oh-my-zsh/plugins/zsh-autosuggestions" ]; then
-  git clone https://github.com/zsh-users/zsh-autosuggestions.git $HOME/.oh-my-zsh/custom/zsh-autosuggestions
+  git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 fi
 
 # plugin fast syntax highlight

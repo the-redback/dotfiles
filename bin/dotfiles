@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+
 [[ "$1" == "source" ]] || \
 
 echo 'Dotfiles - "Cowboy" Ben Alman - http://benalman.com/'

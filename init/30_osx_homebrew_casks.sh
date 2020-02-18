@@ -6,9 +6,9 @@ is_osx || return 1
 
 # Ensure the cask kegs are installed.
 kegs=(
-  caskroom/cask
-  caskroom/drivers
-  caskroom/fonts
+  homebrew/cask-cask
+  homebrew/cask-drivers
+  homebrew/cask-fonts
 )
 brew_tap_kegs
 
@@ -17,6 +17,7 @@ brew cask info this-is-somewhat-annoying 2>/dev/null
 
 # Homebrew casks
 casks=(
+  font-hack-nerd-font
   # Applications
   # a-better-finder-rename
   # alfred
