@@ -26,7 +26,7 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 
 # ============================== powerlevele9k
 POWERLEVEL9K_COMMAND_EXECUTION_TIME_THRESHOLD=1
-POWERLEVEL9K_COMMAND_EXECUTION_TIME_BACKGROUND='plum4'
+POWERLEVEL9K_COMMAND_EXECUTION_TIME_BACKGROUND='grey'
 POWERLEVEL9K_MODE="nerdfont-complete"
 #POWERLEVEL9K_MODE="awesome-fontconfig"
 POWERLEVEL9K_STATUS_HIDE_SIGNAME=true
@@ -46,6 +46,7 @@ POWERLEVEL9K_VCS_SHORTEN_LENGTH=15
 POWERLEVEL9K_VCS_SHORTEN_MIN_LENGTH=13
 POWERLEVEL9K_VCS_SHORTEN_STRATEGY="truncate_from_right"
 POWERLEVEL9K_VCS_SHORTEN_DELIMITER=".."
+POWERLEVEL9K_VCS_CLEAN_BACKGROUND='palegreen1'
 POWERLEVEL9K_HIDE_BRANCH_ICON=true
 POWERLEVEL9K_VCS_GIT_ICON=$'\uF113 '
 #POWERLEVEL9K_COLOR_SCHEME='light'
@@ -213,3 +214,4 @@ if [ -f '$HOME/google-cloud-sdk/path.zsh.inc' ]; then . '$HOME/google-cloud-sdk/
 
 # The next line enables shell command completion for gcloud.
 if [ -f '$HOME/google-cloud-sdk/completion.zsh.inc' ]; then . '$HOME/google-cloud-sdk/completion.zsh.inc'; fi
+export PATH="/usr/local/bin:$PATH"
