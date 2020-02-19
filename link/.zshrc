@@ -117,7 +117,7 @@ HYPHEN_INSENSITIVE="true"
 # Add wisely, as too many plugins slow down shell startup.
 # plugins=(git kubectl minikube themes zsh-syntax-highlighting zsh-autosuggestions)
 plugins=(
-  command-not-found
+  # command-not-found
   docker
   git
   golang

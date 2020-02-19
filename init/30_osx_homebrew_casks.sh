@@ -37,7 +37,7 @@ casks=(
   # hex-fiend
   iterm2
   # karabiner-elements
-  # macvim
+  macvim
   # messenger-for-desktop
   # midi-monitor
   # moom

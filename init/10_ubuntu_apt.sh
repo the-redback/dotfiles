@@ -34,6 +34,7 @@ apt_packages+=(
   cowsay
   curl
   fish
+  fonts-powerline
   gdebi-core
   git-core
   gnome-tweak-tool

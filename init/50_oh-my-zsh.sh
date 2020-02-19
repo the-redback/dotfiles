@@ -32,6 +32,12 @@ if [ ! -d "$HOME/.oh-my-zsh/custom/themes/powerlevel10k" ]; then
   git clone https://github.com/romkatv/powerlevel10k.git $HOME/.oh-my-zsh/custom/themes/powerlevel10k
 fi
 
+# theme spaceship
+if [ ! -d "$HOME/.oh-my-zsh/custom/themes/spaceship" ]; then
+  git clone https://github.com/denysdovhan/spaceship-prompt.git $HOME/.oh-my-zsh/custom/themes/spaceship
+fi
+
+
 # Autocompletion for Minikube.
 #
 
