@@ -23,13 +23,13 @@ src
 # ~/.bashrc: executed by bash(1) for non-login shells.
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
-export PYTHONPATH=$HOME
-export PATH=$PYTHONPATH/bin:/usr/local/go/bin:/snap/bin:$PATH
+# export PYTHONPATH="/usr/local/lib/:$PYTHONPATH"
 export GOPATH=$HOME/go
 export PATH=$GOPATH/bin:/usr/local/go/bin:$PATH
-export PATH=/snap/bin:$PATH
-export PATH=/usr/local/bin:$PATH
+export PATH=${KREW_ROOT:-$HOME/.krew}/bin:$PATH
 export PATH=~/.local/bin:$PATH
+export PATH=/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/local/lib:/usr/local:/snap/bin:$HOME/bin:$PATH
+
 
 export DOCKER_REGISTRY=maruftuhin
 export REGISTRY=maruftuhin

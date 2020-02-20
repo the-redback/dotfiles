@@ -1,16 +1,11 @@
 export TERM="xterm-256color"
 # If you come from bash you might have to change your $PATH.
-export PATH=$HOME/bin:/usr/local/bin:/snap/bin:$PATH
-export PYTHONPATH=$HOME
-export PATH=$PYTHONPATH/bin:/usr/local/go/bin:$PATH
+# export PYTHONPATH="/usr/local/lib/python3.7:$PYTHONPATH"
 export GOPATH=$HOME/go
 export PATH=$GOPATH/bin:/usr/local/go/bin:$PATH
 export PATH=${KREW_ROOT:-$HOME/.krew}/bin:$PATH
-export PATH=/snap/bin:$PATH
-export PATH=/usr/local/bin/:$PATH
-export PATH=/usr/bin/:$PATH
 export PATH=~/.local/bin:$PATH
-export PATH=/usr/local/sbin:$PATH
+export PATH=/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/local/lib:/usr/local:/snap/bin:$HOME/bin:$PATH
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
@@ -183,6 +178,7 @@ alias gp="git add .; git commit -a -m added-all; git push origin HEAD"
 alias g2h="git push origin HEAD"
 alias gr="git reset --hard HEAD"
 alias gf="git fetch --all --tags --prune --prune-tags"
+alias dc="docker-compose"
 
 # kubectl aliases
 alias kc="kubectl"
@@ -214,4 +210,4 @@ if [ -f '$HOME/google-cloud-sdk/path.zsh.inc' ]; then . '$HOME/google-cloud-sdk/
 
 # The next line enables shell command completion for gcloud.
 if [ -f '$HOME/google-cloud-sdk/completion.zsh.inc' ]; then . '$HOME/google-cloud-sdk/completion.zsh.inc'; fi
-export PATH="/usr/local/bin:$PATH"
+
