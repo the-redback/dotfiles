@@ -114,16 +114,15 @@ HYPHEN_INSENSITIVE="true"
 # plugins=(git kubectl minikube themes zsh-syntax-highlighting zsh-autosuggestions)
 plugins=(
   # command-not-found
-  docker
+  docker docker-compose
+  fasd
+  fast-syntax-highlighting
   git
   golang
-  themes
-  fast-syntax-highlighting
-  zsh-autosuggestions
-  fasd
   history-substring-search
-  docker docker-compose
+  themes
   vagrant
+  zsh-autosuggestions
 )
 
 # run 'fast-theme -t zdharma'
@@ -185,8 +184,13 @@ alias kc="kubectl"
 alias k="kubectl"
 
 # xclip
-alias xc="xclip -selection clipboard ; xclip -o -selection clipboard"
-alias xp="xclip -o -selection clipboard"
+if [[ "$(uname 2> /dev/null)" == "Linux" ]]; then
+  alias xc="xclip -selection clipboard ; xclip -o -selection clipboard"
+  alias xp="xclip -o -selection clipboard"
+else
+  alias xc="pbcopy; pbpaste"
+  alias xp="pbpaste"
+fi
 
 # source /etc/zsh_command_not_found
 export DOTFILES=~/.dotfiles
@@ -210,4 +214,5 @@ if [ -f '$HOME/google-cloud-sdk/path.zsh.inc' ]; then . '$HOME/google-cloud-sdk/
 
 # The next line enables shell command completion for gcloud.
 if [ -f '$HOME/google-cloud-sdk/completion.zsh.inc' ]; then . '$HOME/google-cloud-sdk/completion.zsh.inc'; fi
-
+export PATH="/usr/local/opt/libpq/bin:$PATH"
+export PATH="/usr/local/opt/mysql-client/bin:$PATH"
