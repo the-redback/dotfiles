@@ -7,6 +7,11 @@ export PATH=${KREW_ROOT:-$HOME/.krew}/bin:$PATH
 export PATH=~/.local/bin:$PATH
 export PATH=/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/local/lib:/usr/local:/snap/bin:$HOME/bin:$PATH
 
+
+if [[ "$(uname 2> /dev/null)" == "Darwin" ]]; then
+  export PATH=$PATH:$HOME/Library/Python/3.7/bin:/usr/local/bin/python3.7/
+fi
+
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
@@ -216,3 +221,8 @@ if [ -f '$HOME/google-cloud-sdk/path.zsh.inc' ]; then . '$HOME/google-cloud-sdk/
 if [ -f '$HOME/google-cloud-sdk/completion.zsh.inc' ]; then . '$HOME/google-cloud-sdk/completion.zsh.inc'; fi
 export PATH="/usr/local/opt/libpq/bin:$PATH"
 export PATH="/usr/local/opt/mysql-client/bin:$PATH"
+
+# ansible configuration
+export ANSIBLE_STRATEGY_PLUGINS=/Users/maruf/.ansible/plugins/mitogen-0.2.9/ansible_mitogen/plugins/strategy
+
+# End
