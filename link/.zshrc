@@ -223,6 +223,8 @@ export PATH="/usr/local/opt/libpq/bin:$PATH"
 export PATH="/usr/local/opt/mysql-client/bin:$PATH"
 
 # ansible configuration
-export ANSIBLE_STRATEGY_PLUGINS=/Users/maruf/.ansible/plugins/mitogen-0.2.9/ansible_mitogen/plugins/strategy
+export ANSIBLE_CALLBACK_WHITELIST=profile_tasks
+export ANSIBLE_STRATEGY_PLUGINS="/usr/local/lib/python3.7/site-packages/ansible_mitogen/plugins/strategy"
+export ANSIBLE_STRATEGY=mitogen_linear
 
 # End

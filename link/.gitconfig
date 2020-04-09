@@ -27,7 +27,7 @@
   co = checkout
   df = diff
   g = grep -I
-  lg = log -p
+  lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
   pp = !"echo 'Pull'; git pull; echo 'Push'; git push"
   rb = rbranch
   rv = review
