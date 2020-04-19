@@ -20,9 +20,11 @@ export ZSH="$HOME/.oh-my-zsh"
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
 
-#ZSH_THEME="powerlevel9k/powerlevel9k"
+# ZSH_THEME="powerlevel9k/powerlevel9k"
 # powerlevel9k is original theme but powerlevel10k is faster version.
 ZSH_THEME="powerlevel10k/powerlevel10k"
+# ZSH_THEME="spaceship/spaceship"
+# ZSH_THEME="dracula/dracula"
 
 # ============================== powerlevele9k
 POWERLEVEL9K_COMMAND_EXECUTION_TIME_THRESHOLD=1

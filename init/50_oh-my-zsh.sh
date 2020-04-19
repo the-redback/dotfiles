@@ -37,6 +37,11 @@ if [ ! -d "$HOME/.oh-my-zsh/custom/themes/spaceship" ]; then
   git clone https://github.com/denysdovhan/spaceship-prompt.git $HOME/.oh-my-zsh/custom/themes/spaceship
 fi
 
+# theme dracula
+if [ ! -d "$HOME/.oh-my-zsh/custom/themes/dracula" ]; then
+  git clone https://github.com/dracula/zsh.git $HOME/.oh-my-zsh/custom/themes/dracula
+fi
+
 
 # Autocompletion for Minikube.
 #
