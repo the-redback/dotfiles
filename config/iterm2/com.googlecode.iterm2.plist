@@ -2437,9 +2437,11 @@
 	<key>NSWindow Frame NSColorPanel</key>
 	<string>0 167 224 275 0 0 1440 877 </string>
 	<key>NSWindow Frame NSNavPanelAutosaveName</key>
-	<string>419 435 841 470 0 0 1680 1050 </string>
+	<string>419 433 841 470 0 0 1680 1027 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>441 394 665 452 0 0 1680 1050 </string>
+	<string>1082 317 585 427 0 0 1680 1027 </string>
+	<key>NSWindow Frame iTerm Window 1</key>
+	<string>840 64 837 963 0 0 1680 1027 </string>
 	<key>New Bookmarks</key>
 	<array>
 		<dict>
@@ -2762,6 +2764,8 @@
 			<key>Description</key>
 			<string>Default</string>
 			<key>Disable Window Resizing</key>
+			<true/>
+			<key>Draw Powerline Glyphs</key>
 			<true/>
 			<key>Flashing Bell</key>
 			<false/>
@@ -3112,7 +3116,7 @@
 			<key>Screen</key>
 			<integer>-1</integer>
 			<key>Scrollback Lines</key>
-			<integer>1000</integer>
+			<integer>0</integer>
 			<key>Selected Text Color</key>
 			<dict>
 				<key>Alpha Component</key>
@@ -3196,35 +3200,36 @@
 	<key>NoSyncBFPRecents</key>
 	<array>
 		<string>JetBrains Mono</string>
-		<string>Hack Nerd Font</string>
+		<string>Menlo</string>
 		<string>Monaco</string>
+		<string>MesloLGS NF</string>
 	</array>
 	<key>NoSyncCommandHistoryHasEverBeenUsed</key>
 	<true/>
 	<key>NoSyncFrame_SessionsPreferences</key>
 	<dict>
 		<key>screenFrame</key>
-		<string>{{0, 0}, {1440, 900}}</string>
+		<string>{{0, 0}, {1680, 1050}}</string>
 		<key>topLeft</key>
-		<string>{753, 804}</string>
+		<string>{269, 595}</string>
 	</dict>
 	<key>NoSyncFrame_SharedPreferences</key>
 	<dict>
 		<key>screenFrame</key>
 		<string>{{0, 0}, {1680, 1050}}</string>
 		<key>topLeft</key>
-		<string>{675, 841}</string>
+		<string>{736, 879}</string>
 	</dict>
 	<key>NoSyncInstallationId</key>
 	<string>58BA236F-5301-4EEA-A505-2B740D1C30D1</string>
 	<key>NoSyncLastTipTime</key>
-	<real>605682977.94443595</real>
+	<real>608965477.40370405</real>
 	<key>NoSyncLaunchExperienceControllerRunCount</key>
-	<integer>25</integer>
+	<integer>63</integer>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile</key>
 	<true/>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile_selection</key>
-	<integer>1</integer>
+	<integer>0</integer>
 	<key>NoSyncNextAnnoyanceTime</key>
 	<real>603949466.27302897</real>
 	<key>NoSyncOnboardingWindowHasBeenShown</key>
@@ -3953,25 +3958,56 @@
 	<real>603658336.87064397</real>
 	<key>NoSyncTipsToNotShow</key>
 	<array>
-		<string>0004</string>
-		<string>0000</string>
-		<string>0010</string>
-		<string>0014</string>
-		<string>0007</string>
-		<string>0003</string>
+		<string>0017</string>
+		<string>0029</string>
+		<string>0001</string>
 		<string>0013</string>
-		<string>0016</string>
+		<string>0025</string>
+		<string>0037</string>
+		<string>0021</string>
+		<string>0033</string>
+		<string>0045</string>
+		<string>0041</string>
 		<string>0006</string>
+		<string>0018</string>
 		<string>0002</string>
+		<string>0014</string>
+		<string>0026</string>
+		<string>0038</string>
+		<string>0010</string>
+		<string>0022</string>
 		<string>000</string>
+		<string>0034</string>
+		<string>0046</string>
+		<string>0030</string>
+		<string>0042</string>
+		<string>0007</string>
+		<string>0019</string>
+		<string>0003</string>
+		<string>0015</string>
+		<string>0027</string>
+		<string>0039</string>
+		<string>0011</string>
+		<string>0023</string>
+		<string>0035</string>
+		<string>0047</string>
+		<string>0031</string>
+		<string>0043</string>
+		<string>0008</string>
+		<string>0004</string>
+		<string>0016</string>
+		<string>0028</string>
+		<string>0000</string>
 		<string>0012</string>
+		<string>0024</string>
+		<string>0036</string>
+		<string>0020</string>
+		<string>0032</string>
+		<string>0044</string>
+		<string>0040</string>
 		<string>0009</string>
 		<string>0005</string>
-		<string>0001</string>
-		<string>0011</string>
-		<string>0015</string>
-		<string>0008</string>
-		<string>0017</string>
+		<string>0048</string>
 	</array>
 	<key>PasteSpecialRegex</key>
 	<string></string>
@@ -4023,7 +4059,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2020-03-12T05:11:28Z</date>
+	<date>2020-04-18T20:37:07Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>SoundForEsc</key>
