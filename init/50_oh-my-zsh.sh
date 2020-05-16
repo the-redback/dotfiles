@@ -42,6 +42,10 @@ if [ ! -d "$HOME/.oh-my-zsh/custom/themes/dracula" ]; then
   git clone https://github.com/dracula/zsh.git $HOME/.oh-my-zsh/custom/themes/dracula
 fi
 
+if [ ! -d "$HOME/.oh-my-zsh/custom/themes/pure" ]; then
+  git clone https://github.com/sindresorhus/pure.git $HOME/.oh-my-zsh/custom/themes/pure
+fi
+
 
 # Autocompletion for Minikube.
 #

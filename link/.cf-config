@@ -1,0 +1,28 @@
+{
+  "template": [
+    {
+      "alias": "cpp",
+      "lang": "54",
+      "path": "/Users/maruf/go/src/github.com/the-redback/online-judge/workspace-codeforces/cf-template.cpp",
+      "suffix": [
+        "cpp"
+      ],
+      "before_script": "g++ $%full%$ -o $%file%$.o -std=c++17",
+      "debugging_before_script": "g++ $%full%$ -o $%file%$.o -std=c++17 -Dredback",
+      "script": "./$%file%$.o",
+      "after_script": ""
+    }
+  ],
+  "default": 0,
+  "gen_after_parse": true,
+  "save_output": true,
+  "host": "https://codeforces.com",
+  "proxy": "",
+  "folder_name": {
+    "acmsguru": "acmsguru",
+    "contest": "contests",
+    "group": "group",
+    "gym": "gym",
+    "root": "workspace-codeforces"
+  }
+}
