@@ -106,6 +106,11 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status root_indicator background_jobs command_execution_time vcs)
 # end =======================================
 
+# common ===========================================
+POWERLEVEL9K_TRANSIENT_PROMPT=same-dir
+POWERLEVEL9K_KUBECONTEXT_SHOW_ON_COMMAND='kubectl|helm|kubens|kubectx|oc|istioctl|kogito'
+#  End ============================================
+
 # Second config ============================================================================================================================
 function sp {
   git branch > /dev/null 2>&1 || return 1
@@ -131,7 +136,9 @@ POWERLEVEL9K_ETC_ICON='%F{blue}\uf423'
 POWERLEVEL9K_DIR_WRITABLE_FORBIDDEN_FOREGROUND="red"
 POWERLEVEL9K_DIR_WRITABLE_FORBIDDEN_BACKGROUND="clear"
 
-POWERLEVEL9K_GO_ICON="\uf7b7"
+# POWERLEVEL9K_GO_ICON="\uf7b7"
+# POWERLEVEL9K_GO_ICON="🐹"
+POWERLEVEL9K_GO_ICON="\ue724"
 POWERLEVEL9K_GO_VERSION_BACKGROUND='clear'
 POWERLEVEL9K_GO_VERSION_FOREGROUND='081'
 
@@ -161,7 +168,7 @@ POWERLEVEL9K_PROMPT_ADD_NEWLINE=true
 POWERLEVEL9K_PROMPT_ON_NEWLINE=true
 
 # POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status go_version nvm os_icon)
-POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status root_indicator background_jobs command_execution_time nvm os_icon)
+POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status root_indicator background_jobs command_execution_time go_version nvm os_icon)
 POWERLEVEL9K_RIGHT_SEGMENT_SEPARATOR=''
 POWERLEVEL9K_RIGHT_SUBSEGMENT_SEPARATOR='%F{008}\uf104%F{008}'
 
@@ -185,6 +192,7 @@ POWERLEVEL9K_VCS_UNTRACKED_BACKGROUND='clear'
 POWERLEVEL9K_VCS_UNTRACKED_FOREGROUND='green'
 # ===================================================================================================================================
 ZLE_RPROMPT_INDENT=0
+ZLE_LPROMPT_INDENT=0
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -246,7 +254,7 @@ DISABLE_MAGIC_FUNCTIONS=true
 # Add wisely, as too many plugins slow down shell startup.
 # plugins=(git kubectl minikube themes zsh-syntax-highlighting zsh-autosuggestions)
 plugins=(
-  # command-not-found
+#   command-not-found
   docker docker-compose
   fasd
   fast-syntax-highlighting
