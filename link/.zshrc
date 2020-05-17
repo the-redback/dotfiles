@@ -108,20 +108,20 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 
 # common ===========================================
 POWERLEVEL9K_TRANSIENT_PROMPT=same-dir
-POWERLEVEL9K_KUBECONTEXT_SHOW_ON_COMMAND='kubectl|helm|kubens|kubectx|oc|istioctl|kogito'
+# POWERLEVEL9K_KUBECONTEXT_SHOW_ON_COMMAND='kubectl|helm|kubens|kubectx|oc|istioctl|kogito'
 #  End ============================================
 
 # Second config ============================================================================================================================
 function sp {
   git branch > /dev/null 2>&1 || return 1
-  git config user.initials
+  git config user.name
 }
 
 POWERLEVEL9K_DIR_BACKGROUND='237'
-POWERLEVEL9K_CUSTOM_GIT_PAIR="echo \$(sp)"
-POWERLEVEL9K_CUSTOM_GIT_PAIR_BACKGROUND="clear"
-POWERLEVEL9K_CUSTOM_GIT_PAIR_FOREGROUND="blue"
-POWERLEVEL9K_CUSTOM_GIT_PAIR_ICON="\uf7af"
+# POWERLEVEL9K_CUSTOM_GIT_PAIR="echo \$(sp)"
+# POWERLEVEL9K_CUSTOM_GIT_PAIR_BACKGROUND="clear"
+# POWERLEVEL9K_CUSTOM_GIT_PAIR_FOREGROUND="blue"
+# POWERLEVEL9K_CUSTOM_GIT_PAIR_ICON="\uf7af"
 POWERLEVEL9K_DIR_DEFAULT_BACKGROUND="clear"
 POWERLEVEL9K_DIR_DEFAULT_FOREGROUND="012"
 POWERLEVEL9K_DIR_FOREGROUND='010'
@@ -144,9 +144,9 @@ POWERLEVEL9K_GO_VERSION_FOREGROUND='081'
 
 POWERLEVEL9K_HOME_ICON="\ufb26"
 
-POWERLEVEL9K_INSTALLATION_PATH=$ANTIGEN_BUNDLES/bhilburn/powerlevel9k
 
-POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(root_indicator dir dir_writable_joined custom_git_pair vcs_joined)
+# POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(root_indicator dir dir_writable_joined custom_git_pair vcs_joined)
+POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(root_indicator dir dir_writable_joined vcs)
 POWERLEVEL9K_LEFT_SUBSEGMENT_SEPARATOR='%F{008}\uf460%F{008}'
 POWERLEVEL9K_LEFT_SEGMENT_SEPARATOR=''
 
@@ -167,12 +167,16 @@ POWERLEVEL9K_OS_ICON_FOREGROUND='cyan'
 POWERLEVEL9K_PROMPT_ADD_NEWLINE=true
 POWERLEVEL9K_PROMPT_ON_NEWLINE=true
 
+POWERLEVEL9K_TIME_BACKGROUND='clear'
+POWERLEVEL9K_TIME_FOREGROUND='178'
+POWERLEVEL9K_TIME_FORMAT='%D{%I:%M}'
+
 # POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status go_version nvm os_icon)
-POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status root_indicator background_jobs command_execution_time go_version nvm os_icon)
+POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status background_jobs command_execution_time go_version nvm time os_icon)
 POWERLEVEL9K_RIGHT_SEGMENT_SEPARATOR=''
 POWERLEVEL9K_RIGHT_SUBSEGMENT_SEPARATOR='%F{008}\uf104%F{008}'
 
-POWERLEVEL9K_SHORTEN_DELIMITER='%F{008} …%F{008}'
+POWERLEVEL9K_SHORTEN_DELIMITER='%F{008}…%F{008}'
 POWERLEVEL9K_SHORTEN_DIR_LENGTH=3
 POWERLEVEL9K_SHORTEN_STRATEGY="none"
 
@@ -180,19 +184,20 @@ POWERLEVEL9K_STATUS_ERROR_BACKGROUND="clear"
 POWERLEVEL9K_STATUS_ERROR_FOREGROUND="001"
 POWERLEVEL9K_STATUS_OK_BACKGROUND="clear"
 POWERLEVEL9K_STATUS_BACKGROUND="clear"
+# POWERLEVEL9K_STATUS_OK=false
 POWERLEVEL9K_CARRIAGE_RETURN_ICON="\uf071"
 
-POWERLEVEL9K_TIME_FORMAT="%D{%H:%M \uE868  %d.%m}"
+# POWERLEVEL9K_TIME_FORMAT="%D{%H:%M \uE868  %d.%m}"
 
 POWERLEVEL9K_VCS_CLEAN_BACKGROUND='clear'
 POWERLEVEL9K_VCS_CLEAN_FOREGROUND='green'
 POWERLEVEL9K_VCS_MODIFIED_BACKGROUND='clear'
 POWERLEVEL9K_VCS_MODIFIED_FOREGROUND='yellow'
 POWERLEVEL9K_VCS_UNTRACKED_BACKGROUND='clear'
-POWERLEVEL9K_VCS_UNTRACKED_FOREGROUND='green'
+POWERLEVEL9K_VCS_UNTRACKED_FOREGROUND='005'
 # ===================================================================================================================================
 ZLE_RPROMPT_INDENT=0
-ZLE_LPROMPT_INDENT=0
+# ZLE_LPROMPT_INDENT=0
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -254,7 +259,7 @@ DISABLE_MAGIC_FUNCTIONS=true
 # Add wisely, as too many plugins slow down shell startup.
 # plugins=(git kubectl minikube themes zsh-syntax-highlighting zsh-autosuggestions)
 plugins=(
-#   command-not-found
+  command-not-found
   docker docker-compose
   fasd
   fast-syntax-highlighting
@@ -264,6 +269,7 @@ plugins=(
   themes
   vagrant
   zsh-autosuggestions
+  zsh-prompt-benchmark
 )
 
 # run 'fast-theme -t zdharma'
