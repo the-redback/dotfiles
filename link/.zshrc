@@ -112,10 +112,10 @@ POWERLEVEL9K_TRANSIENT_PROMPT=same-dir
 #  End ============================================
 
 # Second config ============================================================================================================================
-function sp {
-  git branch > /dev/null 2>&1 || return 1
-  git config user.name
-}
+# function sp {
+#   git branch > /dev/null 2>&1 || return 1
+#   git config user.name
+# }
 
 POWERLEVEL9K_DIR_BACKGROUND='237'
 # POWERLEVEL9K_CUSTOM_GIT_PAIR="echo \$(sp)"
@@ -172,7 +172,7 @@ POWERLEVEL9K_TIME_FOREGROUND='178'
 POWERLEVEL9K_TIME_FORMAT='%D{%I:%M}'
 
 # POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status go_version nvm os_icon)
-POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status background_jobs command_execution_time go_version nvm time os_icon)
+POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status background_jobs command_execution_time go_version nvm os_icon)
 POWERLEVEL9K_RIGHT_SEGMENT_SEPARATOR=''
 POWERLEVEL9K_RIGHT_SUBSEGMENT_SEPARATOR='%F{008}\uf104%F{008}'
 
@@ -320,8 +320,15 @@ export GO111MODULE=on
 export KIND_IMAGE=kindest/node:v1.16.3
 
 # some more ls aliases
-alias ll='ls -lgaFh'
-alias l='ls -AF'
+# alias ll='ls -lgaFh'
+# alias l='ls -AF'
+# better syntax. https://github.com/ogham/exa
+alias ll='exa -laF'
+alias l='exa -aF'
+
+# cat with bat. https://www.cyberciti.biz/open-source/bat-linux-command-a-cat-clone-with-written-in-rust/
+alias cat='bat --theme Dracula -p'
+export BAT_PAGER=""
 
 # git aliases
 alias gg="git gui"
@@ -385,3 +392,4 @@ export ANSIBLE_STRATEGY=mitogen_linear
 #  Starship faster prompt
 # https://starship.rs/
 # eval "$(starship init zsh)"
+

@@ -4,6 +4,7 @@
       "alias": "cpp",
       "lang": "54",
       "path": "/Users/maruf/go/src/github.com/the-redback/online-judge/workspace-codeforces/cf-template.cpp",
+      "extra_file_path": "/Users/maruf/go/src/github.com/the-redback/online-judge/workspace-codeforces/prettyprint.hpp",
       "suffix": [
         "cpp"
       ],
