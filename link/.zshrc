@@ -13,6 +13,9 @@ if [[ "$(uname 2> /dev/null)" == "Darwin" ]]; then
   export PATH=$PATH:$HOME/Library/Python/3.7/bin:/usr/local/bin/python3.7/
 fi
 
+zstyle ':completion:*' menu select=2
+
+
 # ---------------------------------------------------------------------------- #
 #                                 powerlevel10k                                #
 # ---------------------------------------------------------------------------- #
