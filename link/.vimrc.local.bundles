@@ -8,3 +8,6 @@ Plug 'w0rp/ale'
 "" Color
 Plug 'dracula/vim', { 'as': 'dracula' }
 Plug 'morhetz/gruvbox'
+
+
+Plug 'mhinz/vim-startify'
