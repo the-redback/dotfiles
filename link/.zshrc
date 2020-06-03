@@ -104,7 +104,114 @@ POWERLEVEL9K_VCS_MODIFIED_BACKGROUND='clear'
 POWERLEVEL9K_VCS_MODIFIED_FOREGROUND='yellow'
 POWERLEVEL9K_VCS_UNTRACKED_BACKGROUND='clear'
 POWERLEVEL9K_VCS_UNTRACKED_FOREGROUND='005'
+
 # ---------------------------------------------------------------------------- #
+#                          Plugin Management by Zinit                          #
+# ---------------------------------------------------------------------------- #
+### Added by Zinit's installer
+if [[ ! -f $HOME/.zinit/bin/zinit.zsh ]]; then
+    print -P "%F{33}▓▒░ %F{220}Installing %F{33}DHARMA%F{220} Initiative Plugin Manager (%F{33}zdharma/zinit%F{220})…%f"
+    command mkdir -p "$HOME/.zinit" && command chmod g-rwX "$HOME/.zinit"
+    command git clone https://github.com/zdharma/zinit "$HOME/.zinit/bin" && \
+        print -P "%F{33}▓▒░ %F{34}Installation successful.%f%b" || \
+        print -P "%F{160}▓▒░ The clone has failed.%f%b"
+fi
+
+source "$HOME/.zinit/bin/zinit.zsh"
+autoload -Uz _zinit
+(( ${+_comps} )) && _comps[zinit]=_zinit
+
+# Load a few important annexes, without Turbo
+# (this is currently required for annexes)
+zinit light-mode for \
+    zinit-zsh/z-a-as-monitor \
+    zinit-zsh/z-a-patch-dl \
+    zinit-zsh/z-a-bin-gem-node
+
+# ---------------------------- Pluggin From Github --------------------------- #
+zinit load zsh-users/zsh-history-substring-search
+HISTORY_SUBSTRING_SEARCH_FUZZY="true"
+
+zinit wait lucid for \
+ atinit"ZINIT[COMPINIT_OPTS]=-C; zicompinit; zicdreplay" \
+    zdharma/fast-syntax-highlighting \
+ blockf \
+    zsh-users/zsh-completions \
+ atload"!_zsh_autosuggest_start" \
+    zsh-users/zsh-autosuggestions \
+    romkatv/zsh-prompt-benchmark
+
+# ----------------------------------- Theme ---------------------------------- #
+# zinit ice pick"async.zsh" src"pure.zsh"
+# zinit light sindresorhus/pure
+
+zinit ice depth=1 
+zinit light romkatv/powerlevel10k
+# zinit light bhilburn/powerlevel9k
+# zinit light denysdovhan/spaceship-prompt
+# zinit light dracula/zsh
+
+# zinit ice as"completion" id-as"dc-complete" wait lucid
+# zinit load docker/compose
+
+# zinit ice atclone"dircolors -b LS_COLORS > clrs.zsh" \
+#     atpull'%atclone' pick"clrs.zsh" nocompile'!' \
+#     atload'zstyle ":completion:*" list-colors “${(s.:.)LS_COLORS}”'
+# zinit light trapd00r/LS_COLORS
+
+# ------------------------- Oh My Zsh Plugins/Themes ------------------------- #
+# Oh MY Zsh plugins
+# Example: zinit snippet ""
+# OMZL::git.zsh            < with .zsh file
+# OMZP::git                < plugin
+# OMZ::plugins/git         < plugin
+# OMZT::gnzh               < theme
+
+zinit wait lucid for \
+        OMZP::colored-man-pages \
+        OMZP::command-not-found \
+        OMZP::docker/_docker \
+        OMZP::docker-compose \
+        OMZP::fasd \
+        OMZP::golang \
+        OMZP::vagrant
+zinit snippet OMZP::git
+# ----------------------- Speed Up ZSH-autosuggestions ----------------------- #
+autoload -Uz add-zsh-hook
+
+typeset -gi _UNHOOK_ZSH_AUTOSUGGEST_COUNTER=0
+
+function _unhook_autosuggest() {
+  emulate -L zsh
+  if (( ++_UNHOOK_ZSH_AUTOSUGGEST_COUNTER == 2 )); then
+    add-zsh-hook -D precmd _zsh_autosuggest_start
+    add-zsh-hook -D precmd _unhook_autosuggest
+    unset _UNHOOK_ZSH_AUTOSUGGEST_COUNTER
+  fi
+}
+
+add-zsh-hook precmd _unhook_autosuggest
+
+# ------------------- History substring search Key bindings ------------------ #
+if [[ -n "$terminfo[kcuu1]" ]]; then
+  bindkey -M emacs "$terminfo[kcuu1]" history-substring-search-up
+  bindkey -M viins "$terminfo[kcuu1]" history-substring-search-up
+  bindkey "$terminfo[kcuu1]" history-substring-search-up
+fi
+if [[ -n "$terminfo[kcud1]" ]]; then
+  bindkey -M emacs "$terminfo[kcud1]" history-substring-search-down
+  bindkey -M viins "$terminfo[kcud1]" history-substring-search-down
+  bindkey "$terminfo[kcud1]" history-substring-search-down
+fi
+
+bindkey '^[[A' history-substring-search-up
+bindkey '^[[B' history-substring-search-down
+
+
+# ---------------------------------------------------------------------------- #
+
+# use arrow to select from tab completion options
+zstyle ':completion:*' menu select
 
 ZLE_RPROMPT_INDENT=0
 # ZLE_LPROMPT_INDENT=0
@@ -184,112 +291,3 @@ export ANSIBLE_STRATEGY=mitogen_linear
 # eval "$(starship init zsh)"
 
 export PATH="/usr/local/opt/curl/bin:$PATH"
-
-# ---------------------------------------------------------------------------- #
-#                          Plugin Management by Zinit                          #
-# ---------------------------------------------------------------------------- #
-### Added by Zinit's installer
-if [[ ! -f $HOME/.zinit/bin/zinit.zsh ]]; then
-    print -P "%F{33}▓▒░ %F{220}Installing %F{33}DHARMA%F{220} Initiative Plugin Manager (%F{33}zdharma/zinit%F{220})…%f"
-    command mkdir -p "$HOME/.zinit" && command chmod g-rwX "$HOME/.zinit"
-    command git clone https://github.com/zdharma/zinit "$HOME/.zinit/bin" && \
-        print -P "%F{33}▓▒░ %F{34}Installation successful.%f%b" || \
-        print -P "%F{160}▓▒░ The clone has failed.%f%b"
-fi
-
-source "$HOME/.zinit/bin/zinit.zsh"
-autoload -Uz _zinit
-(( ${+_comps} )) && _comps[zinit]=_zinit
-
-# Load a few important annexes, without Turbo
-# (this is currently required for annexes)
-zinit light-mode for \
-    zinit-zsh/z-a-as-monitor \
-    zinit-zsh/z-a-patch-dl \
-    zinit-zsh/z-a-bin-gem-node
-
-# ---------------------------- Pluggin From Github --------------------------- #
-zinit load zsh-users/zsh-history-substring-search
-HISTORY_SUBSTRING_SEARCH_FUZZY="true"
-
-zinit wait lucid for \
- atinit"ZINIT[COMPINIT_OPTS]=-C; zicompinit; zicdreplay" \
-    zdharma/fast-syntax-highlighting \
- blockf \
-    zsh-users/zsh-completions \
- atload"!_zsh_autosuggest_start" \
-    zsh-users/zsh-autosuggestions \
-    romkatv/zsh-prompt-benchmark
-
-# ----------------------------------- Theme ---------------------------------- #
-# zinit ice pick"async.zsh" src"pure.zsh"
-# zinit light sindresorhus/pure
-
-zinit ice depth=1 
-zinit light romkatv/powerlevel10k
-# zinit light bhilburn/powerlevel9k
-# zinit light denysdovhan/spaceship-prompt
-# zinit light dracula/zsh
-
-# zinit ice as"completion" id-as"dc-complete" wait lucid
-# zinit load docker/compose
-
-# zinit ice atclone"dircolors -b LS_COLORS > clrs.zsh" \
-#     atpull'%atclone' pick"clrs.zsh" nocompile'!' \
-#     atload'zstyle ":completion:*" list-colors “${(s.:.)LS_COLORS}”'
-# zinit light trapd00r/LS_COLORS
-
-# ------------------------- Oh My Zsh Plugins/Themes ------------------------- #
-# Oh MY Zsh plugins
-# Example: zinit snippet ""
-# OMZL::git.zsh            < with .zsh file
-# OMZP::git                < plugin
-# OMZ::plugins/git         < plugin
-# OMZT::gnzh               < theme
-
-zinit wait lucid for \
-        OMZP::colored-man-pages \
-        OMZP::command-not-found \
-        OMZP::docker/_docker \
-        OMZP::docker-compose \
-        OMZP::fasd \
-        OMZP::git \
-        OMZP::golang \
-        OMZP::vagrant
-
-# ----------------------- Speed Up ZSH-autosuggestions ----------------------- #
-autoload -Uz add-zsh-hook
-
-typeset -gi _UNHOOK_ZSH_AUTOSUGGEST_COUNTER=0
-
-function _unhook_autosuggest() {
-  emulate -L zsh
-  if (( ++_UNHOOK_ZSH_AUTOSUGGEST_COUNTER == 2 )); then
-    add-zsh-hook -D precmd _zsh_autosuggest_start
-    add-zsh-hook -D precmd _unhook_autosuggest
-    unset _UNHOOK_ZSH_AUTOSUGGEST_COUNTER
-  fi
-}
-
-add-zsh-hook precmd _unhook_autosuggest
-
-# ------------------- History substring search Key bindings ------------------ #
-if [[ -n "$terminfo[kcuu1]" ]]; then
-  bindkey -M emacs "$terminfo[kcuu1]" history-substring-search-up
-  bindkey -M viins "$terminfo[kcuu1]" history-substring-search-up
-  bindkey "$terminfo[kcuu1]" history-substring-search-up
-fi
-if [[ -n "$terminfo[kcud1]" ]]; then
-  bindkey -M emacs "$terminfo[kcud1]" history-substring-search-down
-  bindkey -M viins "$terminfo[kcud1]" history-substring-search-down
-  bindkey "$terminfo[kcud1]" history-substring-search-down
-fi
-
-bindkey '^[[A' history-substring-search-up
-bindkey '^[[B' history-substring-search-down
-
-
-# ---------------------------------------------------------------------------- #
-
-# use arrow to select from tab completion options
-zstyle ':completion:*' menu select
