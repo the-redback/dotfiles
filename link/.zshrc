@@ -1,3 +1,5 @@
+setopt incappendhistory
+
 export TERM="xterm-256color"
 # If you come from bash you might have to change your $PATH.
 # export PYTHONPATH="/usr/local/lib/python3.7:$PYTHONPATH"
@@ -12,9 +14,6 @@ export PATH=/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/local/lib:/usr/local:/u
 if [[ "$(uname 2> /dev/null)" == "Darwin" ]]; then
   export PATH=$PATH:$HOME/Library/Python/3.7/bin:/usr/local/bin/python3.7/
 fi
-
-zstyle ':completion:*' menu select=2
-
 
 # ---------------------------------------------------------------------------- #
 #                                 powerlevel10k                                #
@@ -128,8 +127,8 @@ alias ll='exa -laF'
 alias l='exa -aF'
 
 # cat with bat. https://www.cyberciti.biz/open-source/bat-linux-command-a-cat-clone-with-written-in-rust/
-alias cat='bat --theme Dracula -p'
-export BAT_PAGER=""
+# alias cat='bat --theme Dracula -p'
+# export BAT_PAGER=""
 
 # git aliases
 alias gg="git gui"
@@ -204,20 +203,22 @@ autoload -Uz _zinit
 
 # Load a few important annexes, without Turbo
 # (this is currently required for annexes)
-# zinit light-mode for \
-#     zinit-zsh/z-a-as-monitor \
-#     zinit-zsh/z-a-patch-dl \
-#     zinit-zsh/z-a-bin-gem-node
+zinit light-mode for \
+    zinit-zsh/z-a-as-monitor \
+    zinit-zsh/z-a-patch-dl \
+    zinit-zsh/z-a-bin-gem-node
 
-# zinit light zsh-users/zsh-syntax-highlighting
+# ---------------------------- Pluggin From Github --------------------------- #
+zinit load zsh-users/zsh-history-substring-search
+HISTORY_SUBSTRING_SEARCH_FUZZY="true"
 
 zinit wait lucid for \
  atinit"ZINIT[COMPINIT_OPTS]=-C; zicompinit; zicdreplay" \
     zdharma/fast-syntax-highlighting \
+ blockf \
+    zsh-users/zsh-completions \
  atload"!_zsh_autosuggest_start" \
     zsh-users/zsh-autosuggestions \
-    zsh-users/zsh-completions \
-    zsh-users/zsh-history-substring-search \
     romkatv/zsh-prompt-benchmark
 
 # ----------------------------------- Theme ---------------------------------- #
@@ -229,6 +230,9 @@ zinit light romkatv/powerlevel10k
 # zinit light bhilburn/powerlevel9k
 # zinit light denysdovhan/spaceship-prompt
 # zinit light dracula/zsh
+
+# zinit ice as"completion" id-as"dc-complete" wait lucid
+# zinit load docker/compose
 
 # zinit ice atclone"dircolors -b LS_COLORS > clrs.zsh" \
 #     atpull'%atclone' pick"clrs.zsh" nocompile'!' \
@@ -244,6 +248,7 @@ zinit light romkatv/powerlevel10k
 # OMZT::gnzh               < theme
 
 zinit wait lucid for \
+        OMZP::colored-man-pages \
         OMZP::command-not-found \
         OMZP::docker/_docker \
         OMZP::docker-compose \
@@ -251,4 +256,40 @@ zinit wait lucid for \
         OMZP::git \
         OMZP::golang \
         OMZP::vagrant
+
+# ----------------------- Speed Up ZSH-autosuggestions ----------------------- #
+autoload -Uz add-zsh-hook
+
+typeset -gi _UNHOOK_ZSH_AUTOSUGGEST_COUNTER=0
+
+function _unhook_autosuggest() {
+  emulate -L zsh
+  if (( ++_UNHOOK_ZSH_AUTOSUGGEST_COUNTER == 2 )); then
+    add-zsh-hook -D precmd _zsh_autosuggest_start
+    add-zsh-hook -D precmd _unhook_autosuggest
+    unset _UNHOOK_ZSH_AUTOSUGGEST_COUNTER
+  fi
+}
+
+add-zsh-hook precmd _unhook_autosuggest
+
+# ------------------- History substring search Key bindings ------------------ #
+if [[ -n "$terminfo[kcuu1]" ]]; then
+  bindkey -M emacs "$terminfo[kcuu1]" history-substring-search-up
+  bindkey -M viins "$terminfo[kcuu1]" history-substring-search-up
+  bindkey "$terminfo[kcuu1]" history-substring-search-up
+fi
+if [[ -n "$terminfo[kcud1]" ]]; then
+  bindkey -M emacs "$terminfo[kcud1]" history-substring-search-down
+  bindkey -M viins "$terminfo[kcud1]" history-substring-search-down
+  bindkey "$terminfo[kcud1]" history-substring-search-down
+fi
+
+bindkey '^[[A' history-substring-search-up
+bindkey '^[[B' history-substring-search-down
+
+
 # ---------------------------------------------------------------------------- #
+
+# use arrow to select from tab completion options
+zstyle ':completion:*' menu select
