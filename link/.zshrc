@@ -1,5 +1,3 @@
-setopt incappendhistory
-
 export TERM="xterm-256color"
 # If you come from bash you might have to change your $PATH.
 # export PYTHONPATH="/usr/local/lib/python3.7:$PYTHONPATH"
@@ -278,9 +276,9 @@ export DOTFILES=~/.dotfiles
 # src
 
 # ansible configuration
-export ANSIBLE_CALLBACK_WHITELIST=profile_tasks
-export ANSIBLE_STRATEGY_PLUGINS="/usr/local/lib/python3.7/site-packages/ansible_mitogen/plugins/strategy"
-export ANSIBLE_STRATEGY=mitogen_linear
+# export ANSIBLE_CALLBACK_WHITELIST=profile_tasks
+# export ANSIBLE_STRATEGY_PLUGINS="/usr/local/lib/python3.7/site-packages/ansible_mitogen/plugins/strategy"
+# export ANSIBLE_STRATEGY=mitogen_linear
 # End
 
 # # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
@@ -291,3 +289,45 @@ export ANSIBLE_STRATEGY=mitogen_linear
 # eval "$(starship init zsh)"
 
 export PATH="/usr/local/opt/curl/bin:$PATH"
+
+# --------------------------- History Configuration -------------------------- #
+HISTFILE="$HOME/.zsh_history"
+HISTSIZE=1000000
+SAVEHIST=1000000
+setopt BANG_HIST                 # Treat the '!' character specially during expansion.
+# setopt EXTENDED_HISTORY          # Write the history file in the ":start:elapsed;command" format.
+setopt INC_APPEND_HISTORY        # Write to the history file immediately, not when the shell exits.
+# setopt SHARE_HISTORY             # Share history between all sessions.
+unsetopt SHARE_HISTORY             # Share history between all sessions.
+setopt HIST_EXPIRE_DUPS_FIRST    # Expire duplicate entries first when trimming history.
+setopt HIST_IGNORE_DUPS          # Don't record an entry that was just recorded again.
+setopt HIST_IGNORE_ALL_DUPS      # Delete old recorded entry if new entry is a duplicate.
+# setopt HIST_FIND_NO_DUPS         # Do not display a line previously found.
+# setopt HIST_IGNORE_SPACE         # Don't record an entry starting with a space.
+setopt HIST_SAVE_NO_DUPS         # Don't write duplicate entries in the history file.
+setopt HIST_REDUCE_BLANKS        # Remove superfluous blanks before recording entry.
+setopt HIST_VERIFY               # Don't execute immediately upon history expansion.
+# setopt HIST_BEEP                 # Beep when accessing nonexistent history.
+
+
+# ----------------------------------- Misc ----------------------------------- #
+# auto cd
+setopt auto_cd
+
+# Easier navigation: .., ..., -
+alias ..='cd ..'
+alias ...='cd ../..'
+alias -- -='cd -'
+
+export PATH="/usr/local/opt/postgresql@11/bin:$PATH"
+export PATH="/usr/local/opt/llvm/bin:$PATH"
+export AIRFLOW_HOME=~/airflow
+
+prompt_pure_cmd_k() {
+	# Enable output to terminal and clear iTerm2 scrollback, the newline
+	# adds an empty row at the beginning, similar to `clear`.
+	zle -I
+	print -n '\e]1337;ClearScrollback\a\n'
+}
+	
+zle -N clear-screen prompt_pure_cmd_k

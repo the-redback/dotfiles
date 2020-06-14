@@ -30,12 +30,10 @@ export PATH=${KREW_ROOT:-$HOME/.krew}/bin:$PATH
 export PATH=~/.local/bin:$PATH
 export PATH=/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/local/lib:/usr/local:/snap/bin:$HOME/bin:$PATH
 
-
 export DOCKER_REGISTRY=maruftuhin
 export REGISTRY=maruftuhin
 export GO111MODULE=on
 export KIND_IMAGE=kindest/node:v1.16.3
-
 
 alias gg="git gui"
 alias gs="git status"
@@ -59,8 +57,8 @@ HISTCONTROL=ignoreboth
 shopt -s histappend
 
 # for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
-HISTSIZE=1000
-HISTFILESIZE=2000
+# HISTSIZE=100000
+# HISTFILESIZE=200000
 
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
@@ -157,3 +155,4 @@ if ! shopt -oq posix; then
     . /etc/bash_completion
   fi
 fi
+export PATH="/usr/local/opt/llvm/bin:$PATH"

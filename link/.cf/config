@@ -16,7 +16,7 @@
   ],
   "default": 0,
   "gen_after_parse": true,
-  "save_output": true,
+  "save_output": false,
   "host": "https://codeforces.com",
   "proxy": "",
   "folder_name": {
