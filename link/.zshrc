@@ -10,7 +10,7 @@ export PATH=/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/local/lib:/usr/local:/u
 
 
 if [[ "$(uname 2> /dev/null)" == "Darwin" ]]; then
-  export PATH=$PATH:$HOME/Library/Python/3.7/bin:/usr/local/bin/python3.7/
+  export PATH=$PATH:$HOME/Library/Python/3.7/bin:/usr/local/bin/python3.7/:/usr/local/lib/ruby/gems/2.7.0/bin
 fi
 
 # ---------------------------------------------------------------------------- #
@@ -228,8 +228,14 @@ export KIND_IMAGE=kindest/node:v1.16.3
 # alias ll='ls -lgaFh'
 # alias l='ls -AF'
 # better syntax. https://github.com/ogham/exa
-alias ll='exa -laF'
-alias l='exa -aF'
+# alias ll='exa -laF'
+# alias l='exa -aF'
+# better syntax and icons
+alias ll='lsd -lA --group-dirs first --blocks permission,user,size,date,name --date relative'
+alias lz='lsd -lA --group-dirs first --blocks permission,user,size,date,name --date relative --total-size -S'
+alias lt='lsd -A --group-dirs first --tree'
+alias l='lsd -A'
+
 
 # cat with bat. https://www.cyberciti.biz/open-source/bat-linux-command-a-cat-clone-with-written-in-rust/
 # alias cat='bat --theme Dracula -p'
@@ -319,8 +325,6 @@ alias ..='cd ..'
 alias ...='cd ../..'
 alias -- -='cd -'
 
-export PATH="/usr/local/opt/postgresql@11/bin:$PATH"
-export PATH="/usr/local/opt/llvm/bin:$PATH"
 export AIRFLOW_HOME=~/airflow
 
 prompt_pure_cmd_k() {
@@ -331,3 +335,11 @@ prompt_pure_cmd_k() {
 }
 	
 zle -N clear-screen prompt_pure_cmd_k
+
+if [[ "$(uname 2> /dev/null)" == "Darwin" ]]; then
+  export PATH=$PATH:$HOME/Library/Python/3.7/bin:/usr/local/bin/python3.7/
+  export PATH="$PATH:/usr/local/lib/ruby/gems/2.7.0/bin"
+  export PATH="/usr/local/opt/ruby/bin:$PATH"
+  export PATH="/usr/local/opt/postgresql@11/bin:$PATH"
+  export PATH="/usr/local/opt/llvm/bin:$PATH"
+fi

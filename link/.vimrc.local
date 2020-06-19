@@ -1,7 +1,7 @@
 let no_buffers_menu=1
 if !exists('g:not_finish_vimplug')
-  colorscheme dracula
   colorscheme gruvbox
+  "colorscheme dracula
 endif
 
 
@@ -74,9 +74,12 @@ let NERDTreeMinimalUI=1
 
 " gruvbox
 let g:gruvbox_italic=1
-" let g:gruvbox_contrast_dark="hard"
+let g:gruvbox_contrast_dark="hard"
 set background=dark
 
+"let g:dracula_italic=1
+"let g:dracula_colorterm = 1
+"set background=dark
 
 " no search highlight
 " https://stackoverflow.com/questions/657447/vim-clear-last-search-highlighting
