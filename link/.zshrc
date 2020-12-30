@@ -1,8 +1,9 @@
 export TERM="xterm-256color"
 # If you come from bash you might have to change your $PATH.
-# export PYTHONPATH="/usr/local/lib/python3.7:$PYTHONPATH"
+# export PYTHONPATH="/usr/local/lib/python3.8:$PYTHONPATH"
 export GOPATH=$HOME/go
-export GOBIN=/usr/local/go/bin
+# export GOBIN=/usr/local/go/bin
+export GOBIN=$HOME/go/bin
 export PATH=$GOPATH/bin:$GOBIN:$PATH
 export PATH=${KREW_ROOT:-$HOME/.krew}/bin:$PATH
 export PATH=~/.local/bin:$PATH
@@ -10,7 +11,7 @@ export PATH=/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/local/lib:/usr/local:/u
 
 
 if [[ "$(uname 2> /dev/null)" == "Darwin" ]]; then
-  export PATH=$PATH:$HOME/Library/Python/3.7/bin:/usr/local/bin/python3.7/:/usr/local/lib/ruby/gems/2.7.0/bin
+#   export PATH=$PATH:$HOME/Library/Python/3.8/bin:/usr/local/bin/python3.8/:/usr/local/lib/ruby/gems/2.7.0/bin
 fi
 
 # ---------------------------------------------------------------------------- #
@@ -139,6 +140,9 @@ zinit wait lucid for \
     zsh-users/zsh-autosuggestions \
     romkatv/zsh-prompt-benchmark
 
+zinit load paulirish/git-open
+
+
 # ----------------------------------- Theme ---------------------------------- #
 # zinit ice pick"async.zsh" src"pure.zsh"
 # zinit light sindresorhus/pure
@@ -238,8 +242,8 @@ alias l='lsd -A'
 
 
 # cat with bat. https://www.cyberciti.biz/open-source/bat-linux-command-a-cat-clone-with-written-in-rust/
-# alias cat='bat --theme Dracula -p'
-# export BAT_PAGER=""
+alias bat='bat --theme Dracula -p'
+export BAT_PAGER=""
 
 # git aliases
 alias gg="git gui"
@@ -249,6 +253,7 @@ alias gp="git add .; git commit -a -m added-all; git push origin HEAD"
 alias g2h="git push origin HEAD"
 alias gr="git reset --hard HEAD"
 alias gf="git fetch --all --tags --prune --prune-tags"
+alias ggo="git open"
 alias dc="docker-compose"
 
 # kubectl aliases
@@ -283,7 +288,7 @@ export DOTFILES=~/.dotfiles
 
 # ansible configuration
 # export ANSIBLE_CALLBACK_WHITELIST=profile_tasks
-# export ANSIBLE_STRATEGY_PLUGINS="/usr/local/lib/python3.7/site-packages/ansible_mitogen/plugins/strategy"
+# export ANSIBLE_STRATEGY_PLUGINS="/usr/local/lib/python3.8/site-packages/ansible_mitogen/plugins/strategy"
 # export ANSIBLE_STRATEGY=mitogen_linear
 # End
 
@@ -337,9 +342,16 @@ prompt_pure_cmd_k() {
 zle -N clear-screen prompt_pure_cmd_k
 
 if [[ "$(uname 2> /dev/null)" == "Darwin" ]]; then
-  export PATH=$PATH:$HOME/Library/Python/3.7/bin:/usr/local/bin/python3.7/
-  export PATH="$PATH:/usr/local/lib/ruby/gems/2.7.0/bin"
-  export PATH="/usr/local/opt/ruby/bin:$PATH"
-  export PATH="/usr/local/opt/postgresql@11/bin:$PATH"
-  export PATH="/usr/local/opt/llvm/bin:$PATH"
+#   export PATH=$PATH:$HOME/Library/Python/3.8/bin:/usr/local/bin/python3.8/
+#   export PATH="$PATH:/usr/local/lib/ruby/gems/2.7.0/bin"
+#   export PATH="/usr/local/opt/ruby/bin:$PATH"
+#   export PATH="/usr/local/opt/postgresql@11/bin:$PATH"
+#   export PATH="/usr/local/opt/llvm/bin:$PATH"
 fi
+export PATH="/usr/local/opt/libpq/bin:$PATH"
+export PATH="/usr/local/opt/curl/bin:$PATH"
+export PATH="/usr/local/opt/gnu-time/libexec/gnubin:$PATH"
+export PATH="/usr/local/bin:$PATH"
+
+bindkey "^[[H" beginning-of-line
+bindkey "^[[F" end-of-line
