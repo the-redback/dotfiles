@@ -156,3 +156,4 @@ if ! shopt -oq posix; then
   fi
 fi
 export PATH="/usr/local/opt/llvm/bin:$PATH"
+. "$HOME/.cargo/env"

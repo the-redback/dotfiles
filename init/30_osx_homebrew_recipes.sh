@@ -12,13 +12,16 @@ recipes=(
   cmatrix
   coreutils
   cowsay
+  fasd # autojump, z
   git
   git-extras
   htop-osx
   hub
   id3tool
   jq
+  kubectx
   lesspipe
+  lsd # modern ls
   man2html
   mercurial
   nmap

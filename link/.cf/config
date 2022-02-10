@@ -3,12 +3,12 @@
     {
       "alias": "cpp",
       "lang": "54",
-      "path": "/Users/maruf/go/src/github.com/the-redback/competitive-programming/workspace-codeforces/cf-template.cpp",
-      "extra_file_path": "/Users/maruf/go/src/github.com/the-redback/competitive-programming/workspace-codeforces/prettyprint.hpp",
+      "path": "/Users/maruf_maruf1/go/src/github.com/the-redback/competitive-programming/workspace-codeforces/cf-template.cpp",
+      "extra_file_path": "/Users/maruf_maruf1/go/src/github.com/the-redback/competitive-programming/workspace-codeforces/prettyprint.hpp",
       "suffix": [
         "cpp"
       ],
-      "before_script": "g++ $%full%$ -o $%file%$.o -std=c++17",
+      "before_script": "g++-11 $%full%$ -o $%file%$.o -std=c++17",
       "debugging_before_script": "g++ $%full%$ -o $%file%$.o -std=c++17 -Dredback",
       "script": "./$%file%$.o",
       "after_script": ""
