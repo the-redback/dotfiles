@@ -1,3 +1,4 @@
+zmodload zsh/zprof
 export TERM="xterm-256color"
 # If you come from bash you might have to change your $PATH.
 # export PYTHONPATH="/usr/local/lib/python3.8:$PYTHONPATH"
@@ -374,8 +375,8 @@ export PATH="/usr/local/opt/openjdk/bin:/usr/libexec:$PATH"
 # hadoop start all application in mac
 alias hstart=/usr/local/Cellar/hadoop/3.3.0/sbin/start-all.sh
 alias hstop=/usr/local/Cellar/hadoop/3.3.0/sbin/stop-all.sh
-export PATH="$HOME/.jenv/bin:$PATH"
-eval "$(jenv init -)"
+# export PATH="$HOME/.jenv/bin:$PATH"
+# eval "$(jenv init -)"
 
 export PATH="$HOME/.pyenv/bin:$PATH"
 export PATH="/usr/local/bin:$PATH"
@@ -392,25 +393,26 @@ export CPPFLAGS="-I/usr/local/opt/llvm/include -I/usr/local/opt/zlib/include"
   export PKG_CONFIG_PATH="/usr/local/opt/zlib/lib/pkgconfig"
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/Users/maruf_maruf1/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "/Users/maruf_maruf1/anaconda3/etc/profile.d/conda.sh" ]; then
-        . "/Users/maruf_maruf1/anaconda3/etc/profile.d/conda.sh"
-    else
-        export PATH="/Users/maruf_maruf1/anaconda3/bin:$PATH"
-    fi
-fi
-unset __conda_setup
+# __conda_setup="$('/Users/maruf_maruf1/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+# if [ $? -eq 0 ]; then
+#     eval "$__conda_setup"
+# else
+#     if [ -f "/Users/maruf_maruf1/anaconda3/etc/profile.d/conda.sh" ]; then
+#         . "/Users/maruf_maruf1/anaconda3/etc/profile.d/conda.sh"
+#     else
+#         export PATH="/Users/maruf_maruf1/anaconda3/bin:$PATH"
+#     fi
+# fi
+# unset __conda_setup
 # <<< conda initialize <<<
 
-export PATH="$HOME/.jenv/bin:$PATH"
-export PATH="$HOME/.jenv/bin:$PATH"
-eval "$(jenv init -)"
+# export PATH="$HOME/.jenv/bin:$PATH"
+# eval "$(jenv init -)"
 export PATH="/usr/local/opt/libpq/bin:$PATH"
 
 #export NVM_DIR="$HOME/.nvm"
 #[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 #[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 export PATH="/usr/local/opt/bzip2/bin:$PATH"
+alias python=/usr/bin/python3
+alias pip=/usr/local/bin/pip3

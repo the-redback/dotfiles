@@ -15,6 +15,7 @@ recipes=(
   fasd # autojump, z
   git
   git-extras
+  git-sizer
   htop-osx
   hub
   id3tool
