@@ -1,0 +1,90 @@
+[user]
+	name = the-redback
+	email = maruf.2hin@gmail.com
+
+[diff]
+  external = meld
+  tool = meld
+
+[difftool]
+  prompt = false
+
+[core]
+  autocrlf = input
+  whitespace = space-before-tab,trailing-space,tabwidth=4
+  excludesfile = ~/.gitignore
+  preloadindex = true
+
+[credential]
+  helper = cache --timeout=3600
+
+[apply]
+  whitespace = fix
+
+[alias]
+  br = branch
+  ci = commit
+  co = checkout
+  df = diff
+  g = grep -I
+  lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+  pp = "!echo 'Pull'; git pull; echo 'Push'; git push"
+  rb = rbranch
+  rv = review
+  st = status
+  fa = fetch --all --prune
+  furb = "!echo \"Fetch upstream\"; git fetch upstream; echo \"Rebase\"; git rebase upstream/master"
+  delete-merged-into-upstream = !git branch --merged remotes/upstream/master | grep -v master | grep -v \"\\*\" | xargs -t -n 1 git branch -d
+  remote-delete-merged-origin = !git branch -a --merged remotes/origin/master | grep -v master | grep remotes/origin/ | cut -d / -f 3 | xargs -t -n 1 git push --delete origin
+  superclean = clean -fdx -e '*.sublime-*' -e '.gcloud'
+  pr = "!pr() { git fetch upstream pull/$1/head:pr-$1; git checkout pr-$1; }; pr"
+  amend = commit -n --amend --no-edit
+
+[push]
+  default = current
+
+[color]
+  ui = auto
+  interactive = auto
+  diff = auto
+  status = auto
+  branch = auto
+  pager = true
+[color "branch"]
+  current = yellow reverse
+  local = yellow
+  remote = green
+[color "diff"]
+  meta = yellow bold
+  frag = magenta bold
+  old = red bold
+  new = green bold
+[color "status"]
+  added = yellow
+  changed = green
+  untracked = cyan
+
+[merge]
+  log = true
+
+[rerere]
+  enabled = 1
+
+[rebase]
+  autosquash = true
+
+[include]
+  path = ~/.gitconfig.platform
+[url "git@github.com:"]
+	insteadOf = https://github.com/
+# [commit]
+# 	gpgsign = true
+[gui]
+	fontdiff = -family \"JetBrains Mono\" -size 12 -weight normal -slant roman -underline 0 -overstrike 0
+	tabsize = 4
+[filesystem "Oracle Corporation|15.0.2|/dev/disk1s1"]
+	timestampResolution = 7000 nanoseconds
+	minRacyThreshold = 0 nanoseconds
+[filesystem "Oracle Corporation|16.0.1|/dev/disk1s1"]
+	timestampResolution = 6000 nanoseconds
+	minRacyThreshold = 0 nanoseconds
