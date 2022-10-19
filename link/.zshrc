@@ -150,9 +150,10 @@ zinit wait lucid for \
     light-mode \
   zsh-users/zsh-completions \
   zdharma-continuum/fast-syntax-highlighting \
-  zsh-users/zsh-autosuggestions \
   romkatv/zsh-prompt-benchmark \
   paulirish/git-open
+
+zinit light zsh-users/zsh-autosuggestions
 
 
 # ----------------------------------- Theme ---------------------------------- #
@@ -250,7 +251,7 @@ src
 
 # completion of aws
 if type aws >/dev/null 2>&1; then
-complete -C '/opt/homebrew/bin/aws_completer' aws
+  complete -C '/opt/homebrew/bin/aws_completer' aws
 fi
 
 # ---------------------------------------------------------------------------- #
@@ -298,7 +299,7 @@ alias gp="git add .; git commit -a -m added-all; git push origin HEAD"
 alias g2h="git push origin HEAD"
 alias gr="git reset --hard HEAD"
 alias gf="git fetch --all --tags --prune --prune-tags"
-alias ggo="git open"
+alias go="git open"
 alias dc="docker-compose"
 
 # kubectl aliases
@@ -414,7 +415,7 @@ export PATH="/usr/local/opt/llvm/bin:$PATH"
 export LDFLAGS="-L/usr/local/opt/llvm/lib -L/usr/local/opt/zlib/lib"
 export CPPFLAGS="-I/usr/local/opt/llvm/include -I/usr/local/opt/zlib/include"
 
-  export PKG_CONFIG_PATH="/usr/local/opt/zlib/lib/pkgconfig"
+export PKG_CONFIG_PATH="/usr/local/opt/zlib/lib/pkgconfig"
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
 # __conda_setup="$('/Users/maruf_maruf1/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
@@ -453,4 +454,54 @@ export CPPFLAGS="-I/opt/homebrew/opt/openjdk/include"
 # test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
 source <(kubectl completion zsh)
-echo "done"
+
+# ----------------------------------- Zeiss ----------------------------------- #
+
+region () {
+    case "$1" in
+        ue1)
+            export AWS_REGION=us-east-1;
+            export VIX_REGION=ue1
+        ;;
+        ue2)
+            export AWS_REGION=us-east-2;
+            export VIX_REGION=ue2
+        ;;
+        uw2)
+            export AWS_REGION=us-west-2;
+            export VIX_REGION=uw2
+        ;;
+        cc1)
+            export AWS_REGION=ca-central-1;
+            export VIX_REGION=cc1
+        ;;
+        ec1)
+            export AWS_REGION=eu-central-1;
+            export VIX_REGION=ec1
+        ;;
+        *)
+            echo "Expected one of [ue1,ue2,uw2,cc1]"
+        ;;
+    esac
+}
+creds() {
+  case "$1" in
+    prod)
+        export AWS_PROFILE=vixprod
+        # echo "Now using the AWS prod account"
+    ;;
+    dev)
+        export AWS_PROFILE=vixdev
+        # echo "Now using the AWS dev account"
+    ;;
+    *)
+        # echo "Expected either dev or prod"
+    ;;
+  esac
+}
+
+creds prod
+region ue1
+
+# ----------------------------------- Other ----------------------------------- #
+
