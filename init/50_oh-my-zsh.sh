@@ -46,27 +46,3 @@
 #   git clone https://github.com/sindresorhus/pure.git $HOME/.oh-my-zsh/custom/themes/pure
 # fi
 
-
-# # Autocompletion for Minikube.
-# #
-
-# if [ -e $commands[minikube] ]; then
-#   minikube completion bash > $DOTFILES/source/50_minikube.sh
-#   minikube completion zsh > $DOTFILES/source/50_minikube.zsh
-# fi
-
-# if [ -e $commands[kubectl] ]; then
-#   kubectl completion bash > $DOTFILES/source/50_kubectl.sh
-#   kubectl completion zsh > $DOTFILES/source/50_kubectl.zsh
-# fi
-
-# if [ -e $commands[helm] ]; then
-#   helm completion bash > $DOTFILES/source/50_helm.sh
-#   helm completion zsh > $DOTFILES/source/50_helm.zsh
-# fi
-
-
-# if [ -e $commands[kind] ]; then
-#   kind completion bash > $DOTFILES/source/50_kind.sh
-#   kind completion zsh > $DOTFILES/source/50_kind.zsh
-# fi

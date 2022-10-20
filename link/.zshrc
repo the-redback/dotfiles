@@ -1,4 +1,13 @@
-zmodload zsh/zprof
+autoload -U +X compinit && compinit
+
+# HISTFILE=~/.zsh_history
+# HISTSIZE=500000
+# SAVEHIST=500000
+# setopt appendhistory
+# setopt INC_APPEND_HISTORY  
+# setopt SHARE_HISTORY
+
+# zmodload zsh/zprof
 export TERM="xterm-256color"
 # If you come from bash you might have to change your $PATH.
 # export PYTHONPATH="/usr/local/lib/python3.8:$PYTHONPATH"
@@ -11,9 +20,9 @@ export PATH=~/.local/bin:$PATH
 export PATH=/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/local/lib:/usr/local:/usr/local/opt/llvm/bin:/snap/bin:$HOME/bin:$PATH
 
 
-if [[ "$(uname 2> /dev/null)" == "Darwin" ]]; then
+# if [[ "$(uname 2> /dev/null)" == "Darwin" ]]; then
 #   export PATH=$PATH:$HOME/Library/Python/3.8/bin:/usr/local/bin/python3.8/:/usr/local/lib/ruby/gems/2.7.0/bin
-fi
+# fi
 
 # ---------------------------------------------------------------------------- #
 #                                 powerlevel10k                                #
@@ -108,40 +117,42 @@ POWERLEVEL9K_VCS_UNTRACKED_FOREGROUND='005'
 # ---------------------------------------------------------------------------- #
 #                          Plugin Management by Zinit                          #
 # ---------------------------------------------------------------------------- #
+
+ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
+
 ### Added by Zinit's installer
-if [[ ! -f $HOME/.zinit/bin/zinit.zsh ]]; then
+if [[ ! -f ${ZINIT_HOME}/zinit.zsh ]]; then
     print -P "%F{33}▓▒░ %F{220}Installing %F{33}DHARMA%F{220} Initiative Plugin Manager (%F{33}zdharma/zinit%F{220})…%f"
-    command mkdir -p "$HOME/.zinit" && command chmod g-rwX "$HOME/.zinit"
-    command git clone https://github.com/zdharma/zinit "$HOME/.zinit/bin" && \
-        print -P "%F{33}▓▒░ %F{34}Installation successful.%f%b" || \
-        print -P "%F{160}▓▒░ The clone has failed.%f%b"
+    mkdir -p "$(dirname $ZINIT_HOME)"
+    git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
 fi
 
-source "$HOME/.zinit/bin/zinit.zsh"
+source "${ZINIT_HOME}/zinit.zsh"
+
 autoload -Uz _zinit
 (( ${+_comps} )) && _comps[zinit]=_zinit
 
 # Load a few important annexes, without Turbo
 # (this is currently required for annexes)
 zinit light-mode for \
-    zinit-zsh/z-a-as-monitor \
-    zinit-zsh/z-a-patch-dl \
-    zinit-zsh/z-a-bin-gem-node
+    zdharma-continuum/zinit-annex-as-monitor \
+    zdharma-continuum/zinit-annex-bin-gem-node \
+    zdharma-continuum/zinit-annex-patch-dl \
+    zdharma-continuum/zinit-annex-rust
+
+### End of Zinit's installer chunk
 
 # ---------------------------- Pluggin From Github --------------------------- #
 zinit load zsh-users/zsh-history-substring-search
 HISTORY_SUBSTRING_SEARCH_FUZZY="true"
 
 zinit wait lucid for \
- atinit"ZINIT[COMPINIT_OPTS]=-C; zicompinit; zicdreplay" \
-    zdharma/fast-syntax-highlighting \
- blockf \
-    zsh-users/zsh-completions \
- atload"!_zsh_autosuggest_start" \
-    zsh-users/zsh-autosuggestions \
-    romkatv/zsh-prompt-benchmark
-
-zinit load paulirish/git-open
+    light-mode \
+  zsh-users/zsh-completions \
+  zdharma-continuum/fast-syntax-highlighting \
+  zsh-users/zsh-autosuggestions \
+  romkatv/zsh-prompt-benchmark \
+  paulirish/git-open
 
 
 # ----------------------------------- Theme ---------------------------------- #
@@ -180,8 +191,10 @@ zinit wait lucid for \
         OMZP::golang \
         OMZP::kubectl \
         OMZP::minikube \
-        OMZP::vagrant
-zinit snippet OMZP::git
+        OMZP::vagrant \
+        OMZP::mvn \
+        OMZP::aws \
+        OMZP::git
 # ----------------------- Speed Up ZSH-autosuggestions ----------------------- #
 autoload -Uz add-zsh-hook
 
@@ -213,6 +226,32 @@ fi
 bindkey '^[[A' history-substring-search-up
 bindkey '^[[B' history-substring-search-down
 
+
+# ----------------------------------- Autocompletion ----------------------------------- #
+
+# # source /etc/zsh_command_not_found
+export DOTFILES=~/.dotfiles
+# set -x
+
+# Source all files in "source"
+function src() {
+  local file
+  if [[ "$1" ]]; then
+    source "$DOTFILES/source/$1.zsh"
+  else
+    for file in $DOTFILES/source/*.zsh; do
+      source "$file"
+    done
+  fi
+}
+
+# Execute Sourcing source folder
+src
+
+# completion of aws
+if type aws >/dev/null 2>&1; then
+complete -C '/opt/homebrew/bin/aws_completer' aws
+fi
 
 # ---------------------------------------------------------------------------- #
 
@@ -249,6 +288,7 @@ alias l='lsd -A'
 # cat with bat. https://www.cyberciti.biz/open-source/bat-linux-command-a-cat-clone-with-written-in-rust/
 alias bat='bat --theme Dracula -p'
 export BAT_PAGER=""
+alias cat='bat --theme Dracula -p'
 
 # git aliases
 alias gg="git gui"
@@ -273,23 +313,6 @@ else
   alias xc="pbcopy; pbpaste"
   alias xp="pbpaste"
 fi
-
-# source /etc/zsh_command_not_found
-export DOTFILES=~/.dotfiles
-
-# Source all files in "source"
-# function src() {
-#   local file
-#   if [[ "$1" ]]; then
-#     source "$DOTFILES/source/$1.zsh"
-#   else
-#     for file in $DOTFILES/source/*.zsh; do
-#       source "$file"
-#     done
-#   fi
-# }
-
-# src
 
 # ansible configuration
 # export ANSIBLE_CALLBACK_WHITELIST=profile_tasks
@@ -324,6 +347,7 @@ setopt HIST_SAVE_NO_DUPS         # Don't write duplicate entries in the history 
 setopt HIST_REDUCE_BLANKS        # Remove superfluous blanks before recording entry.
 setopt HIST_VERIFY               # Don't execute immediately upon history expansion.
 # setopt HIST_BEEP                 # Beep when accessing nonexistent history.
+
 
 
 # ----------------------------------- Misc ----------------------------------- #
@@ -368,13 +392,13 @@ if command -v pyenv 1>/dev/null 2>&1; then
   eval "$(pyenv init -)"
 fi
 
-export JAVA_HOME=$(/usr/libexec/java_home -v 1.8)
+# export JAVA_HOME=$(/usr/libexec/java_home -v 1.8)
 
 export PATH="/usr/local/opt/openjdk/bin:/usr/libexec:$PATH"
 
 # hadoop start all application in mac
-alias hstart=/usr/local/Cellar/hadoop/3.3.0/sbin/start-all.sh
-alias hstop=/usr/local/Cellar/hadoop/3.3.0/sbin/stop-all.sh
+# alias hstart=/usr/local/Cellar/hadoop/3.3.0/sbin/start-all.sh
+# alias hstop=/usr/local/Cellar/hadoop/3.3.0/sbin/stop-all.sh
 # export PATH="$HOME/.jenv/bin:$PATH"
 # eval "$(jenv init -)"
 
@@ -415,4 +439,18 @@ export PATH="/usr/local/opt/libpq/bin:$PATH"
 #[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 export PATH="/usr/local/opt/bzip2/bin:$PATH"
 alias python=/usr/bin/python3
-alias pip=/usr/local/bin/pip3
+alias pip=/usr/bin/pip3
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+# [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+
+# openjdk
+export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"
+export CPPFLAGS="-I/opt/homebrew/opt/openjdk/include"
+
+# test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+
+source <(kubectl completion zsh)
+echo "done"
