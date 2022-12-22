@@ -299,7 +299,7 @@ alias gp="git add .; git commit -a -m added-all; git push origin HEAD"
 alias g2h="git push origin HEAD"
 alias gr="git reset --hard HEAD"
 alias gf="git fetch --all --tags --prune --prune-tags"
-# alias go="git open"
+alias gho="git open"
 alias dc="docker-compose"
 
 # kubectl aliases
