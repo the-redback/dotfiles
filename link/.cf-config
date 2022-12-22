@@ -8,7 +8,7 @@
       "suffix": [
         "cpp"
       ],
-      "before_script": "gcc-11 $%full%$ -o $%file%$.o -std=c++17",
+      "before_script": "gcc $%full%$ -o $%file%$.o -std=c++17",
       "debugging_before_script": "g++ $%full%$ -o $%file%$.o -std=c++17 -Dredback",
       "script": "./$%file%$.o",
       "after_script": ""
