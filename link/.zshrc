@@ -301,7 +301,7 @@ alias gr="git reset --hard HEAD"
 alias gf="git fetch --all --tags --prune --prune-tags"
 alias ggo="git open"
 alias dc="docker-compose"
-alias gh="github ."
+# alias gh="github ." # github has official cli called 'gh'
 
 # kubectl aliases
 alias kc="kubectl"
