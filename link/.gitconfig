@@ -82,3 +82,8 @@
 [gui]
 	fontdiff = -family \"JetBrains Mono\" -size 12 -weight normal -slant roman -underline 0 -overstrike 0
 	tabsize = 4
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true

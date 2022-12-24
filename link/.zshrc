@@ -194,8 +194,8 @@ zinit wait lucid for \
         OMZP::minikube \
         OMZP::vagrant \
         OMZP::mvn \
-        OMZP::aws \
-        OMZP::git
+        OMZP::aws
+        # OMZP::git # add aliases manually
 # ----------------------- Speed Up ZSH-autosuggestions ----------------------- #
 autoload -Uz add-zsh-hook
 
@@ -299,8 +299,9 @@ alias gp="git add .; git commit -a -m added-all; git push origin HEAD"
 alias g2h="git push origin HEAD"
 alias gr="git reset --hard HEAD"
 alias gf="git fetch --all --tags --prune --prune-tags"
-alias gho="git open"
+alias ggo="git open"
 alias dc="docker-compose"
+alias gh="github ."
 
 # kubectl aliases
 alias kc="kubectl"
@@ -507,5 +508,4 @@ region ue1
 
 # ----------------------------------- Other ----------------------------------- #
 
-export NODE_EXTRA_CA_CERTS=~/.vix/veracity-root-ca.crt
 export PATH="/opt/homebrew/bin:$PATH"

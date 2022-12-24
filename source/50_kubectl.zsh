@@ -14,7 +14,7 @@ compdef _kubectl kubectl
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-#compdef _kubectl kubectl
+#compdef kubectl
 
 # zsh completion for kubectl                              -*- shell-script -*-
 
@@ -28,7 +28,6 @@ __kubectl_debug()
 
 _kubectl()
 {
-    echo $ZSH_VERSION
     local shellCompDirectiveError=1
     local shellCompDirectiveNoSpace=2
     local shellCompDirectiveNoFileComp=4
@@ -103,7 +102,24 @@ _kubectl()
         return
     fi
 
+    local activeHelpMarker="_activeHelp_ "
+    local endIndex=${#activeHelpMarker}
+    local startIndex=$((${#activeHelpMarker}+1))
+    local hasActiveHelp=0
     while IFS='\n' read -r comp; do
+        # Check if this is an activeHelp statement (i.e., prefixed with $activeHelpMarker)
+        if [ "${comp[1,$endIndex]}" = "$activeHelpMarker" ];then
+            __kubectl_debug "ActiveHelp found: $comp"
+            comp="${comp[$startIndex,-1]}"
+            if [ -n "$comp" ]; then
+                compadd -x "${comp}"
+                __kubectl_debug "ActiveHelp will need delimiter"
+                hasActiveHelp=1
+            fi
+
+            continue
+        fi
+
         if [ -n "$comp" ]; then
             # If requested, completions are returned with a description.
             # The description is preceded by a TAB character.
@@ -111,7 +127,7 @@ _kubectl()
             # We first need to escape any : as part of the completion itself.
             comp=${comp//:/\\:}
 
-            local tab=$(printf '\t')
+            local tab="$(printf '\t')"
             comp=${comp//$tab/:}
 
             __kubectl_debug "Adding completion: ${comp}"
@@ -119,6 +135,17 @@ _kubectl()
             lastComp=$comp
         fi
     done < <(printf "%s\n" "${out[@]}")
+
+    # Add a delimiter after the activeHelp statements, but only if:
+    # - there are completions following the activeHelp statements, or
+    # - file completion will be performed (so there will be choices after the activeHelp)
+    if [ $hasActiveHelp -eq 1 ]; then
+        if [ ${#completions} -ne 0 ] || [ $((directive & shellCompDirectiveNoFileComp)) -eq 0 ]; then
+            __kubectl_debug "Adding activeHelp delimiter"
+            compadd -x "--"
+            hasActiveHelp=0
+        fi
+    fi
 
     if [ $((directive & shellCompDirectiveNoSpace)) -ne 0 ]; then
         __kubectl_debug "Activating nospace."
@@ -192,4 +219,3 @@ _kubectl()
 if [ "$funcstack[1]" = "_kubectl" ]; then
     _kubectl
 fi
-
