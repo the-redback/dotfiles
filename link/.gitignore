@@ -62,3 +62,6 @@
 # IDE
 .idea/
 .vscode/
+
+# dependency
+.yalc

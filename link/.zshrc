@@ -292,7 +292,8 @@ export BAT_PAGER=""
 alias cat='bat --theme Dracula -p'
 
 # git aliases
-alias gg="git gui"
+alias gg='lazygit'
+alias ggg="git gui"
 alias gs="git status"
 alias gm="git checkout master;git pull origin master"
 alias gp="git add .; git commit -a -m added-all; git push origin HEAD"
@@ -301,6 +302,7 @@ alias gr="git reset --hard HEAD"
 alias gf="git fetch --all --tags --prune --prune-tags"
 alias ggo="git open"
 alias dc="docker-compose"
+alias lg='lazygit'
 # alias gh="github ." # github has official cli called 'gh'
 
 # kubectl aliases
@@ -453,6 +455,8 @@ export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"
 export CPPFLAGS="-I/opt/homebrew/opt/openjdk/include"
 
 # test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+
+alias docker_restart="osascript -e 'quit app \"Docker\"' && open -a Docker"
 
 source <(kubectl completion zsh)
 
