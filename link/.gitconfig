@@ -1,6 +1,7 @@
 [user]
 	name = the-redback
 	email = maruf.2hin@gmail.com
+	signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICuislp9DtdE8bUYU1xXPRVe8Iaqf9xHSVy7kacmeN16
 
 [diff]
   external = meld
@@ -87,3 +88,9 @@
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
 	required = true
+[gpg]
+	format = ssh
+[gpg "ssh"]
+	program = /Applications/1Password.app/Contents/MacOS/op-ssh-sign
+[commit]
+	gpgsign = true
