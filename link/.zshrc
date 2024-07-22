@@ -82,6 +82,16 @@ POWERLEVEL9K_NVM_FOREGROUND='green'
 POWERLEVEL9K_OS_ICON_BACKGROUND='clear'
 POWERLEVEL9K_OS_ICON_FOREGROUND='cyan'
 
+POWERLEVEL9K_AWS_BACKGROUND='clear'
+# POWERLEVEL9K_AWS_FOREGROUND='cyan'
+
+POWERLEVEL9K_KUBECONTEXT_BACKGROUND='clear'
+POWERLEVEL9K_KUBECONTEXT_FOREGROUND='magenta'
+POWERLEVEL9K_KUBECONTEXT_SHORTEN=(gke eks)
+POWERLEVEL9K_KUBECONTEXT_CONTENT_EXPANSION='${P9K_KUBECONTEXT_CLOUD_CLUSTER:-${P9K_KUBECONTEXT_NAME}}'
+
+
+
 POWERLEVEL9K_PROMPT_ADD_NEWLINE=true
 POWERLEVEL9K_PROMPT_ON_NEWLINE=true
 
@@ -90,7 +100,7 @@ POWERLEVEL9K_TIME_FOREGROUND='178'
 POWERLEVEL9K_TIME_FORMAT='%D{%I:%M}'
 
 # POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status go_version nvm os_icon)
-POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status background_jobs command_execution_time go_version nvm os_icon)
+POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status kubecontext background_jobs command_execution_time go_version nvm os_icon)
 POWERLEVEL9K_RIGHT_SEGMENT_SEPARATOR=''
 POWERLEVEL9K_RIGHT_SUBSEGMENT_SEPARATOR='%F{008}\uf104%F{008}'
 
@@ -183,6 +193,7 @@ zinit light romkatv/powerlevel10k
 # OMZT::gnzh               < theme
 
 zinit wait lucid for \
+        OMZP::aws \
         OMZP::colored-man-pages \
         OMZP::command-not-found \
         OMZP::docker/_docker \
@@ -191,10 +202,11 @@ zinit wait lucid for \
         OMZP::fasd \
         OMZP::golang \
         OMZP::kubectl \
-        OMZP::minikube \
-        OMZP::vagrant \
         OMZP::mvn \
-        OMZP::aws
+        OMZP::minikube \
+        OMZP::terraform \
+        OMZP::vagrant
+        
         # OMZP::git # add aliases manually
 # ----------------------- Speed Up ZSH-autosuggestions ----------------------- #
 autoload -Uz add-zsh-hook
@@ -296,6 +308,8 @@ alias gg='lazygit'
 alias ggg="git gui"
 alias gs="git status"
 alias gm="git checkout master;git pull origin master"
+alias gy="git checkout yalow;git pull origin yalow"
+alias ge="git checkout elion;git pull origin elion"
 alias gp="git add .; git commit -a -m added-all; git push origin HEAD"
 alias g2h="git push origin HEAD"
 alias gr="git reset --hard HEAD"
@@ -485,8 +499,23 @@ region () {
             export AWS_REGION=eu-central-1;
             export VIX_REGION=ec1
         ;;
+        ew1)
+            export AWS_REGION=eu-west-1;
+            export VIX_REGION=ew1
+        ;;
+        as1)
+            export AWS_REGION=ap-south-1;
+            export VIX_REGION=as1
+        ;;
+        uw2-*)
+            export AWS_REGION=us-west-2;
+            export VIX_REGION=$1
+        ;;
+        yalow-uw2-stg)
+            export VIX_REGION=$1
+        ;;
         *)
-            echo "Expected one of [ue1,ue2,uw2,cc1]"
+            echo "Expected one of [ue1,ue2,uw2,cc1,ec1,ew1]"
         ;;
     esac
 }
@@ -500,6 +529,16 @@ creds() {
         export AWS_PROFILE=vixdev
         # echo "Now using the AWS dev account"
     ;;
+    yalow)
+        az account set --subscription d1d65a51-c661-46b1-aea7-30d0dfc1c8fd
+    ;;
+    elion)
+        az account set --subscription 4bf2684f-5bcb-400e-9a42-8a5d6df3aa3f
+    ;;
+    maruf_2hin)
+        export AWS_PROFILE=maruf_2hin
+        # echo "Now using the AWS dev account"
+    ;;
     *)
         # echo "Expected either dev or prod"
     ;;
@@ -508,8 +547,10 @@ creds() {
 
 
 creds prod
-region ue1
+region uw2-stg
 
 # ----------------------------------- Other ----------------------------------- #
 
 export PATH="/opt/homebrew/bin:$PATH"
+export NODE_EXTRA_CA_CERTS=~/.vix/concatenated.crt
+export PROMPT_EOL_MARK='' #no mark for 'no newline'
