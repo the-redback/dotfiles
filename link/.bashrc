@@ -38,6 +38,7 @@ export KIND_IMAGE=kindest/node:v1.16.3
 alias gg="git gui"
 alias gs="git status"
 alias gm="git checkout master;git pull origin master"
+alias gmn="git checkout main;git pull origin main"
 alias gp="git add .; git commit -a -m added-all; git push origin HEAD"
 alias g2h="git push origin HEAD"
 alias gr="git reset --hard HEAD"

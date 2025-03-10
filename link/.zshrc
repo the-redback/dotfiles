@@ -194,20 +194,47 @@ zinit light romkatv/powerlevel10k
 
 zinit wait lucid for \
         OMZP::aws \
+        OMZP::chezmoi \
         OMZP::colored-man-pages \
         OMZP::command-not-found \
-        OMZP::docker/_docker \
+        OMZP::docker \
         OMZP::docker-compose \
         OMZP::extract \
-        OMZP::fasd \
+        OMZP::fzf \
         OMZP::golang \
         OMZP::kubectl \
         OMZP::mvn \
         OMZP::minikube \
         OMZP::terraform \
-        OMZP::vagrant
-        
+        OMZP::zoxide
+  
         # OMZP::git # add aliases manually
+
+_fix-omz-plugin() {
+    [[ -f ./._zinit/teleid ]] || return 1
+    local teleid="$(<./._zinit/teleid)"
+    local pluginid
+    for pluginid (${teleid#OMZ::plugins/} ${teleid#OMZP::}) {
+        [[ $pluginid != $teleid ]] && break
+    }
+    (($?)) && return 1
+    print "Fixing $teleid..."
+    git clone --quiet --no-checkout --depth=1 --filter=tree:0 https://github.com/ohmyzsh/ohmyzsh
+    cd ./ohmyzsh
+    git sparse-checkout set --no-cone /plugins/$pluginid
+    git checkout --quiet
+    cd ..
+    local file
+    for file (./ohmyzsh/plugins/$pluginid/*~(.gitignore|*.plugin.zsh)(D)) {
+        print "Copying ${file:t}..."
+        cp -R $file ./${file:t}
+    }
+    rm -rf ./ohmyzsh
+}
+
+# Without this, the additional files were not loading
+zinit wait lucid atpull"%atclone" atclone"_fix-omz-plugin" for OMZ::plugins/aliases
+
 # ----------------------- Speed Up ZSH-autosuggestions ----------------------- #
 autoload -Uz add-zsh-hook
 
@@ -305,9 +332,10 @@ alias cat='bat --theme Dracula -p'
 
 # git aliases
 alias gg='lazygit'
-alias ggg="git gui"
+alias ggg="git gui 2>/dev/null"
 alias gs="git status"
 alias gm="git checkout master;git pull origin master"
+alias gmn="git checkout main;git pull origin main"
 alias gy="git checkout yalow;git pull origin yalow"
 alias ge="git checkout elion;git pull origin elion"
 alias gp="git add .; git commit -a -m added-all; git push origin HEAD"
@@ -322,6 +350,9 @@ alias lg='lazygit'
 # kubectl aliases
 alias kc="kubectl"
 alias k="kubectl"
+
+# chezmoi (shay-mwa) aliases
+alias ch="chezmoi"
 
 # xclip
 if [[ "$(uname 2> /dev/null)" == "Linux" ]]; then
@@ -472,85 +503,15 @@ export CPPFLAGS="-I/opt/homebrew/opt/openjdk/include"
 
 alias docker_restart="osascript -e 'quit app \"Docker\"' && open -a Docker"
 
-source <(kubectl completion zsh)
-
-# ----------------------------------- Zeiss ----------------------------------- #
-
-
-region () {
-    case "$1" in
-        ue1)
-            export AWS_REGION=us-east-1;
-            export VIX_REGION=ue1
-        ;;
-        ue2)
-            export AWS_REGION=us-east-2;
-            export VIX_REGION=ue2
-        ;;
-        uw2)
-            export AWS_REGION=us-west-2;
-            export VIX_REGION=uw2
-        ;;
-        cc1)
-            export AWS_REGION=ca-central-1;
-            export VIX_REGION=cc1
-        ;;
-        ec1)
-            export AWS_REGION=eu-central-1;
-            export VIX_REGION=ec1
-        ;;
-        ew1)
-            export AWS_REGION=eu-west-1;
-            export VIX_REGION=ew1
-        ;;
-        as1)
-            export AWS_REGION=ap-south-1;
-            export VIX_REGION=as1
-        ;;
-        uw2-*)
-            export AWS_REGION=us-west-2;
-            export VIX_REGION=$1
-        ;;
-        yalow-uw2-stg)
-            export VIX_REGION=$1
-        ;;
-        *)
-            echo "Expected one of [ue1,ue2,uw2,cc1,ec1,ew1]"
-        ;;
-    esac
-}
-creds() {
-  case "$1" in
-    prod)
-        export AWS_PROFILE=vixprod
-        # echo "Now using the AWS prod account"
-    ;;
-    dev)
-        export AWS_PROFILE=vixdev
-        # echo "Now using the AWS dev account"
-    ;;
-    yalow)
-        az account set --subscription d1d65a51-c661-46b1-aea7-30d0dfc1c8fd
-    ;;
-    elion)
-        az account set --subscription 4bf2684f-5bcb-400e-9a42-8a5d6df3aa3f
-    ;;
-    maruf_2hin)
-        export AWS_PROFILE=maruf_2hin
-        # echo "Now using the AWS dev account"
-    ;;
-    *)
-        # echo "Expected either dev or prod"
-    ;;
-  esac
-}
-
-
-creds prod
-region uw2-stg
 
 # ----------------------------------- Other ----------------------------------- #
 
 export PATH="/opt/homebrew/bin:$PATH"
 export NODE_EXTRA_CA_CERTS=~/.vix/concatenated.crt
 export PROMPT_EOL_MARK='' #no mark for 'no newline'
+export PATH="/opt/homebrew/opt/jpeg/bin:$PATH"
+
+export LDFLAGS="-L/opt/homebrew/opt/jpeg/lib"
+export CPPFLAGS="-I/opt/homebrew/opt/jpeg/include"
+export PKG_CONFIG_PATH="/opt/homebrew/opt/jpeg/lib/pkgconfig"
+
