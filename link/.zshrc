@@ -354,6 +354,8 @@ alias k="kubectl"
 # chezmoi (shay-mwa) aliases
 alias ch="chezmoi"
 
+alias pca="pre-commit run -a"
+
 # xclip
 if [[ "$(uname 2> /dev/null)" == "Linux" ]]; then
   alias xc="xclip -selection clipboard ; xclip -o -selection clipboard"
@@ -503,6 +505,12 @@ export CPPFLAGS="-I/opt/homebrew/opt/openjdk/include"
 
 alias docker_restart="osascript -e 'quit app \"Docker\"' && open -a Docker"
 
+# ----------------------------------- Other scripts ----------------------------------- #
+# Good to isolate work related scripts into separate file and source in in zshrc
+
+for file in $(compgen -G "$HOME/*.zshrc.sh"); do
+  [ -r "$file" ] && source "$file"
+done
 
 # ----------------------------------- Other ----------------------------------- #
 
