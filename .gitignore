@@ -1,3 +1,16 @@
 **/.cf/session
 **/session
 .DS_Store
+
+!.gitignore
+
+
+# Ignore everything inside .config/ recursively
+.config/**
+
+# But don't ignore directories inside .config/ so git can check .enc files
+!.config/
+!.config/**/
+
+# And don't ignore any .enc files at any depth inside .config/
+!.config/**/*.enc

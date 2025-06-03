@@ -1,0 +1,11 @@
+README.md
+.git
+.gitignore
+Makefile
+.dockerignore
+.sops.yaml
+.stow-local-ignore
+Dockerfile
+LICENSE
+TODO
+.DS_Store
