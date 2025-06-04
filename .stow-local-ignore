@@ -1,11 +1,5 @@
+Makefile
 README.md
 .git
-.gitignore
-Makefile
-.dockerignore
+vault/
 .sops.yaml
-.stow-local-ignore
-Dockerfile
-LICENSE
-TODO
-.DS_Store

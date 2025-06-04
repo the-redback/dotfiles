@@ -266,33 +266,6 @@ fi
 bindkey '^[[A' history-substring-search-up
 bindkey '^[[B' history-substring-search-down
 
-
-# ----------------------------------- Autocompletion ----------------------------------- #
-
-# # source /etc/zsh_command_not_found
-export DOTFILES=~/.dotfiles
-# set -x
-
-# Source all files in "source"
-function src() {
-  local file
-  if [[ "$1" ]]; then
-    source "$DOTFILES/source/$1.zsh"
-  else
-    for file in $DOTFILES/source/*.zsh; do
-      source "$file"
-    done
-  fi
-}
-
-# Execute Sourcing source folder
-src
-
-# completion of aws
-if type aws >/dev/null 2>&1; then
-  complete -C '/opt/homebrew/bin/aws_completer' aws
-fi
-
 # ---------------------------------------------------------------------------- #
 
 # use arrow to select from tab completion options
@@ -508,7 +481,7 @@ alias docker_restart="osascript -e 'quit app \"Docker\"' && open -a Docker"
 # ----------------------------------- Other scripts ----------------------------------- #
 # Good to isolate work related scripts into separate file and source in in zshrc
 
-for file in $(compgen -G "$HOME/*.zshrc.sh"); do
+for file in $HOME/*.zshrc.sh; do
   [ -r "$file" ] && source "$file"
 done
 

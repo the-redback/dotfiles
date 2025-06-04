@@ -1,5 +1,5 @@
 creation_rules:
-  - path_regex: ".*"
+  - path_regex: "^vault/.*"
     key_groups:
     - age:
       - "age1lf3gyq0ka6xqgv2hu6jdmhzu5ce3jk6rfzthkkpx45j5f9u9uqcs2jha3n"

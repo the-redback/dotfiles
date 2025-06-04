@@ -1,25 +1,35 @@
+SOPS_FILES := $(shell find vault -name '*.enc')
+
 define LOAD_AGE_SECRET
 $(eval export SOPS_AGE_KEY=$(shell op read "op://Private/sops-age-private-key/secret" | grep '^AGE-SECRET-KEY'))
 endef
 
 encrypt:
-	@echo "Encrypting decrypted files to .enc..."
-	@find .config -type f ! -name '*.enc' -exec sh -c 'sops --encrypt "$$0" > "$$0.enc"' {} \;
+	@for file in $(shell find vault -type f ! -name '*.enc' ! -name '.stow-local-ignore' ! -name '.DS_Store' ! -name '.gitignore'); do \
+		echo "Encrypting $$file -> $$file.enc"; \
+		SOPS_AGE_KEY=$$SOPS_AGE_KEY sops --encrypt --output $$file.enc $$file; \
+	done
 
 decrypt:
-	@echo "Decrypting .enc files..."
-	$(call LOAD_AGE_SECRET)
-	@find .config -type f -name '*.enc' -exec sh -c 'sops --decrypt "$$0" > "$${0%.enc}"' {} \;
+	@for file in $(SOPS_FILES); do \
+		outfile=$$(echo $$file | sed 's/\.enc$$//'); \
+		echo "Decrypting $$file -> $$outfile"; \
+		SOPS_AGE_KEY=$$SOPS_AGE_KEY sops --decrypt --output $$outfile $$file; \
+	done
 
-stow:
-	@echo "Symlinking dotfiles using stow..."
-	@stow *
+stow-core:
+	stow --target=$(HOME) core
+
+stow-vault:
+	stow --target=$(HOME) vault
+
+stow: stow-core stow-vault
 
 stage: encrypt
-	@echo "Staging only encrypted files..."
-	@git add $(shell find .config -type f -name '*.enc')
+	@echo "Staging....."
+	@git add .
 
-commit:
+commit: stage
 	@read -p "Commit message: " msg; \
 	git commit -m "$$msg"
 
