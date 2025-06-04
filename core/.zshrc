@@ -496,3 +496,7 @@ export LDFLAGS="-L/opt/homebrew/opt/jpeg/lib"
 export CPPFLAGS="-I/opt/homebrew/opt/jpeg/include"
 export PKG_CONFIG_PATH="/opt/homebrew/opt/jpeg/lib/pkgconfig"
 
+# Temporary, fixed with zinit
+
+source <(kubectl completion zsh)
+source <(docker completion zsh)
