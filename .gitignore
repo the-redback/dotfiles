@@ -1,6 +1,7 @@
 **/.cf/session
 **/session
 .DS_Store
+.idea
 
 !.gitignore
 

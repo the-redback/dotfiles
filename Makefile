@@ -1,21 +1,29 @@
 SOPS_FILES := $(shell find vault -name '*.enc')
 
-define LOAD_AGE_SECRET
-$(eval export SOPS_AGE_KEY=$(shell op read "op://Private/sops-age-private-key/secret" | grep '^AGE-SECRET-KEY'))
-endef
-
 encrypt:
-	@for file in $(shell find vault -type f ! -name '*.enc' ! -name '.stow-local-ignore' ! -name '.DS_Store' ! -name '.gitignore'); do \
+	@for file in $(shell find vault -type f \
+		! -name '*.enc' \
+		! -name '.stow-local-ignore' \
+		! -name '.DS_Store' \
+		! -name '.gitignore'); do \
 		echo "Encrypting $$file -> $$file.enc"; \
-		SOPS_AGE_KEY=$$SOPS_AGE_KEY sops --encrypt --output $$file.enc $$file; \
+		SOPS_AGE_KEY="AGE-SECRET-KEY-DUMMY" \
+		sops --encrypt --output $$file.enc $$file; \
 	done
 
+# only decrypt files that are newer than the decrypted version
 decrypt:
-	@for file in $(SOPS_FILES); do \
-		outfile=$$(echo $$file | sed 's/\.enc$$//'); \
-		echo "Decrypting $$file -> $$outfile"; \
-		SOPS_AGE_KEY=$$SOPS_AGE_KEY sops --decrypt --output $$outfile $$file; \
+	@SOPS_AGE_KEY=$$(op read "op://Private/sops-age-private-key/secret"); \
+	for encfile in $(SOPS_FILES); do \
+		plainfile=$$(echo $$encfile | sed 's/\.enc$$//'); \
+		if [ ! -f $$plainfile ] || [ $$encfile -nt $$plainfile ]; then \
+			echo "Decrypting $$encfile -> $$plainfile"; \
+			SOPS_AGE_KEY=$$SOPS_AGE_KEY sops --decrypt --output $$plainfile $$encfile; \
+		else \
+			echo "Skipping $$encfile (up to date)"; \
+		fi \
 	done
+
 
 stow-core:
 	stow --target=$(HOME) core
@@ -26,7 +34,7 @@ stow-vault:
 install: stow-core stow-vault
 
 stage: encrypt
-	@echo "Staging....."
+	@echo "Staging files..."
 	@git add .
 
 commit: stage
@@ -36,9 +44,10 @@ commit: stage
 push:
 	git push origin main
 
-sync: stage commit push
+sync: commit push
 
-.PHONY: encrypt decrypt stow stage commit push sync
+.PHONY: encrypt decrypt stow-core stow-vault install stage commit push sync
+
 
 
 # IMAGE_PREFIX = maruftuhin

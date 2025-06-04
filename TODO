@@ -2,3 +2,17 @@
 - dconf tilix config file
 * Use apt instead of apt-get
 * fasd instead of autojump. https://news.ycombinator.com/item?id=4464299
+
+
+
+README:
+
+-> Generate sops-age keys
+
+PUB_KEY=$(grep '^# public key:' ~/.config/sops/age/key.txt | awk '{print $4}')
+PRIV_KEY=$(grep -v '^#' ~/.config/sops/age/key.txt)
+
+op item create --category "Secure Note" --title "sops-age-public-key" "secret=$PUB_KEY"
+op item create --category "Secure Note" --title "sops-age-private-key" "secret=$PRIV_KEY"
+
+
