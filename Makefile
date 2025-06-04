@@ -5,6 +5,7 @@ encrypt:
 		! -name '*.enc' \
 		! -name '.stow-local-ignore' \
 		! -name '.DS_Store' \
+	    ! -name '*.bak' \
 		! -name '.gitignore'); do \
 		echo "Encrypting $$file -> $$file.enc"; \
 		SOPS_AGE_KEY="AGE-SECRET-KEY-DUMMY" \
@@ -17,6 +18,11 @@ decrypt:
 	for encfile in $(SOPS_FILES); do \
 		plainfile=$$(echo $$encfile | sed 's/\.enc$$//'); \
 		if [ ! -f $$plainfile ] || [ $$encfile -nt $$plainfile ]; then \
+			if [ -f $$plainfile ]; then \
+				backupfile=$${plainfile}.$$(date +%Y%m%d%H%M%S).bak; \
+				echo "Backing up existing $$plainfile to $$backupfile"; \
+				cp $$plainfile $$backupfile; \
+			fi; \
 			echo "Decrypting $$encfile -> $$plainfile"; \
 			SOPS_AGE_KEY=$$SOPS_AGE_KEY sops --decrypt --output $$plainfile $$encfile; \
 		else \
