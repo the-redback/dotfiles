@@ -1,4 +1,4 @@
-# ref: https://github.com/maruf/dotfiles/blob/master/Dockerfile
+# ref: https://github.com/the-redback/dotfiles/blob/master/Dockerfile
 FROM ubuntu:latest
 
 RUN apt-get update && \
@@ -21,19 +21,19 @@ RUN apt-get update && \
     apt-get clean && \
     apt-get autoremove -y
 
-# Add maruf as user
+# Add redback as user
 RUN useradd --user-group \
             --create-home \
             --shell /bin/bash \
-            maruf && \
-    echo 'maruf ALL=(ALL) NOPASSWD: ALL' >> /etc/sudoers
+            redback && \
+    echo 'redback ALL=(ALL) NOPASSWD: ALL' >> /etc/sudoers
 # Switch to damon user and /home/damon directory
-USER maruf
-ENV HOME /home/maruf
-WORKDIR /home/maruf
+USER redback
+ENV HOME /home/redback
+WORKDIR /home/redback
 
 # RUN mkdir src && cd src && \
-#     git clone git://github.com/maruf/dotfiles.git && \
+#     git clone git://github.com/redback/dotfiles.git && \
 #     cd dotfiles && \
 #     ./install
 # RUN git config --global --unset 'url.git@github.com:.insteadof' && \
@@ -49,10 +49,10 @@ RUN curl -LO https://storage.googleapis.com/golang/go${GO_VERSION}.linux-amd64.t
     rm go${GO_VERSION}.linux-amd64.tar.gz && \
     mkdir -p src/go/bin
 
-COPY . /home/maruf/src/dotfiles
+COPY . /home/redback/src/dotfiles
 
 RUN mkdir .ssh && \
-    sudo chown -R maruf.maruf /home/maruf && \
+    sudo chown -R redback.redback /home/redback && \
     cd src/dotfiles && \
     ./install
 

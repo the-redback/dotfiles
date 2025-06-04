@@ -23,7 +23,7 @@ stow-core:
 stow-vault:
 	stow --target=$(HOME) vault
 
-stow: stow-core stow-vault
+install: stow-core stow-vault
 
 stage: encrypt
 	@echo "Staging....."
