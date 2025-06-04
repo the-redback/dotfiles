@@ -14,3 +14,4 @@ vault/**
 
 # And don't ignore any .enc files at any depth inside vault/
 !vault/**/*.enc
+!vault/**/*.stow-local-ignore
