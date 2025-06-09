@@ -3,7 +3,8 @@
 * Use apt instead of apt-get
 * fasd instead of autojump. https://news.ycombinator.com/item?id=4464299
 
-
+- Github action
+-- Pre-commit hook to check if anything is in vault except .enc file
 
 README:
 

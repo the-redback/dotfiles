@@ -158,10 +158,12 @@ HISTORY_SUBSTRING_SEARCH_FUZZY="true"
 
 zinit wait lucid for \
     light-mode \
-  zsh-users/zsh-completions \
   zdharma-continuum/fast-syntax-highlighting \
   romkatv/zsh-prompt-benchmark \
   paulirish/git-open
+
+zinit wait lucid atload"zicompinit; zicdreplay" blockf for \
+    zsh-users/zsh-completions
 
 zinit light zsh-users/zsh-autosuggestions
 
@@ -194,7 +196,6 @@ zinit light romkatv/powerlevel10k
 
 zinit wait lucid for \
         OMZP::aws \
-        OMZP::chezmoi \
         OMZP::colored-man-pages \
         OMZP::command-not-found \
         OMZP::docker \
@@ -498,5 +499,5 @@ export PKG_CONFIG_PATH="/opt/homebrew/opt/jpeg/lib/pkgconfig"
 
 # Temporary, fixed with zinit
 
-source <(kubectl completion zsh)
-source <(docker completion zsh)
+# source <(kubectl completion zsh)
+# source <(docker completion zsh)
