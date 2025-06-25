@@ -1,4 +1,4 @@
-autoload -U +X compinit && compinit
+# autoload -U +X compinit && compinit
 
 # HISTFILE=~/.zsh_history
 # HISTSIZE=500000
