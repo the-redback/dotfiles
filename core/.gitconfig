@@ -96,3 +96,5 @@
 	gpgsign = true
 [http]
 	postBuffer = 1M
+[pull]
+	ff = only

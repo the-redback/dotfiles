@@ -502,3 +502,4 @@ export PKG_CONFIG_PATH="/opt/homebrew/opt/jpeg/lib/pkgconfig"
 # source <(kubectl completion zsh)
 # source <(docker completion zsh)
 export PATH="$(aqua root-dir)/bin:$PATH"
+export PATH="/opt/homebrew/opt/ruby/bin:$PATH"
