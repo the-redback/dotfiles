@@ -374,7 +374,6 @@ setopt HIST_VERIFY               # Don't execute immediately upon history expans
 # setopt HIST_BEEP                 # Beep when accessing nonexistent history.
 
 
-
 # ----------------------------------- Misc ----------------------------------- #
 # auto cd
 setopt auto_cd
@@ -428,7 +427,6 @@ export PATH="/usr/local/opt/openjdk/bin:/usr/libexec:$PATH"
 # eval "$(jenv init -)"
 
 export PATH="$HOME/.pyenv/bin:$PATH"
-export PATH="/usr/local/bin:$PATH"
 
 # eval "$(pyenv init -)"
 # eval "$(pyenv virtualenv-init -)"
@@ -488,7 +486,7 @@ done
 
 # ----------------------------------- Other ----------------------------------- #
 
-export PATH="/opt/homebrew/bin:$PATH"
+export PATH="/usr/local/bin:/opt/homebrew/bin:$PATH"
 export NODE_EXTRA_CA_CERTS=~/.vix/concatenated.crt
 export PROMPT_EOL_MARK='' #no mark for 'no newline'
 export PATH="/opt/homebrew/opt/jpeg/bin:$PATH"
@@ -503,3 +501,4 @@ export PKG_CONFIG_PATH="/opt/homebrew/opt/jpeg/lib/pkgconfig"
 # source <(docker completion zsh)
 export PATH="$(aqua root-dir)/bin:$PATH"
 export PATH="/opt/homebrew/opt/ruby/bin:$PATH"
+export PATH="/Users/udamaruf/Library/Python/3.9/bin:$PATH"
