@@ -328,7 +328,7 @@ alias k="kubectl"
 # chezmoi (shay-mwa) aliases
 alias ch="chezmoi"
 
-alias pca="pre-commit run -a"
+alias pca="SKIP=terraform_checkov pre-commit run -a"
 
 # xclip
 if [[ "$(uname 2> /dev/null)" == "Linux" ]]; then
