@@ -14,7 +14,7 @@ encrypt:
 
 # only decrypt files that are newer than the decrypted version
 decrypt:
-	@SOPS_AGE_KEY=$$(op read "op://Private/sops-age-private-key/secret"); \
+	@SOPS_AGE_KEY=$$(op read "op://Private/dotfiles-sops-age-private-key/secret" --account my.1password.com); \
 	for encfile in $(SOPS_FILES); do \
 		plainfile=$$(echo $$encfile | sed 's/\.enc$$//'); \
 		if [ ! -f $$plainfile ] || [ $$encfile -nt $$plainfile ]; then \
