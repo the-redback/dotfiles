@@ -464,6 +464,9 @@ export PATH="/usr/local/opt/bzip2/bin:$PATH"
 alias python=/usr/bin/python3
 alias pip=/usr/bin/pip3
 
+alias gcc=gcc-15
+alias g++=g++-15
+
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 # [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
@@ -486,19 +489,13 @@ done
 
 # ----------------------------------- Other ----------------------------------- #
 
-export PATH="/usr/local/bin:/opt/homebrew/bin:$PATH"
+export PATH="/opt/homebrew/bin:/usr/local/bin:$PATH"
 export NODE_EXTRA_CA_CERTS=~/.vix/concatenated.crt
-export PROMPT_EOL_MARK='' #no mark for 'no newline'
-export PATH="/opt/homebrew/opt/jpeg/bin:$PATH"
-
-export LDFLAGS="-L/opt/homebrew/opt/jpeg/lib"
-export CPPFLAGS="-I/opt/homebrew/opt/jpeg/include"
-export PKG_CONFIG_PATH="/opt/homebrew/opt/jpeg/lib/pkgconfig"
 
 # Temporary, fixed with zinit
 
 # source <(kubectl completion zsh)
 # source <(docker completion zsh)
-export PATH="$(aqua root-dir)/bin:$PATH"
-export PATH="/opt/homebrew/opt/ruby/bin:$PATH"
-export PATH="/Users/udamaruf/Library/Python/3.9/bin:$PATH"
+# export PATH="$(aqua root-dir)/bin:$PATH"
+# export PATH="/opt/homebrew/opt/ruby/bin:$PATH"
+# export PATH="/Users/udamaruf/Library/Python/3.9/bin:$PATH"
